@@ -1,4 +1,4 @@
-> [目录](https://github.com/keer2345/reading-notes/issues/2#issue-733897659)
+> [目录](https://github.com/keer2345/reading-notes/tree/main/it/the-common-lisp-cookbook)
 
 # 第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)
 
