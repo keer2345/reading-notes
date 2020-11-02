@@ -2,6 +2,30 @@
 
 # 第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)](#第一章-开始httplispcookbookgithubiocl-cookbookgetting-startedhtml)
+- [安装](#安装)
+    - [通过包管理器](#通过包管理器)
+    - [通过Roswell](#通过roswell)
+    - [通过Docker](#通过docker)
+    - [Windoows](#windoows)
+- [开始REPL](#开始repl)
+- [Libraries](#libraries)
+    - [安装Quicklisp](#安装quicklisp)
+    - [安装库](#安装库)
+    - [先进的依赖关系管理](#先进的依赖关系管理)
+- [项目实践](#项目实践)
+    - [创建新项目](#创建新项目)
+    - [如何加载已有的项目](#如何加载已有的项目)
+- [更多设置](#更多设置)
+- [更多阅读](#更多阅读)
+- [参考](#参考)
+
+<!-- markdown-toc end -->
+
+
 # 安装
 ## 通过包管理器
 ```
@@ -216,3 +240,74 @@ Quicklisp 还提供了 [Quicklisp bundles](https://www.quicklisp.org/beta/bundle
 └── tests
     └── main.lisp
 ```
+
+我们的 `my-project.asd`
+``` lisp
+(defsystem "my-project"
+  :version "0.1.0"
+  :author ""
+  :license ""
+  :depends-on ()
+  :components ((:module "src"
+                :components
+                ((:file "main"))))
+  :description ""
+  :in-order-to ((test-op (test-op "my-project/tests"))))
+
+(defsystem "my-project/tests"
+  :author ""
+  :license ""
+  :depends-on ("my-project"
+               "rove")
+  :components ((:module "tests"
+                :components
+                ((:file "main"))))
+  :description "Test system for my-project"
+  :perform (test-op (op c) (symbol-call :rove :run c)))
+```
+
+还有 `src/main.lisp`:
+``` lisp
+(defpackage my-project
+  (:use :cl))
+(in-package :my-project)
+
+;; blah blah blah.
+```
+
+- ASDF 文档：[defining a system with defsystem](https://common-lisp.net/project/asdf/asdf.html#Defining-systems-with-defsystem)
+
+## 如何加载已有的项目
+首先，如果创建或克隆到 `~/common-lisp`, `~/.local/share/common-lisp/source/` 或 `~/quicklisp/local-projects` 其中的一个目录，就可以使用 `(ql:quickload …)`。
+
+否则需要编译和加载它的系统定义（`.asd`）。在 SLIME 中使用 `slime-asdf` 加载，在 `.asd` 除键入 `C-c C-k` （*slime-compile-and-load-file*），然后使用 `(ql:quickload …)`。
+
+通常在 REPL 中通过这样进入系统：
+``` lisp
+(use-package :my-project)
+```
+
+最后可以通过 `C-c C-k` 或 `C-c C-c`（*slime-compile-defun*）编译源码，并在 REPL 中看到结果。
+
+直到 ASDF 集成到了 Quicklisp，就可以 `quickload` 我们的项目。
+
+# 更多设置
+设置 SBCL 的默认编码为 utf-8：
+```
+(setf sb-impl::*default-external-format* :utf-8)
+```
+可以将其添加到 `~/.sbclrc`。
+
+如果不喜欢 REPL 打印大写符号，可以：
+```
+(setf *print-case* :downcase)
+```
+请注意，这可能会破坏某些包装，例如 [Mito](https://github.com/fukamachi/mito/issues/45)。 避免在生产中这样做。
+
+# 更多阅读
+源代码的组织、库和包：https://lispmethods.com/libraries.html
+
+# 参考
+
+- https://wiki.debian.org/CommonLisp
+- http://articulate-lisp.com/project/new-project.html
