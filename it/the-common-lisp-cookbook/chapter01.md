@@ -1,11 +1,10 @@
 > [目录](https://github.com/keer2345/reading-notes/tree/main/it/the-common-lisp-cookbook)
 
-# 第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)
+**第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)**
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [第一章 [开始](http://lispcookbook.github.io/cl-cookbook/getting-started.html)](#第一章-开始httplispcookbookgithubiocl-cookbookgetting-startedhtml)
 - [安装](#安装)
     - [通过包管理器](#通过包管理器)
     - [通过Roswell](#通过roswell)
