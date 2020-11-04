@@ -1,5 +1,15 @@
 **Chapter 00 [Preface](https://github.com/norvig/paip-lisp/blob/master/docs/preface.md)**
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Preface](#preface)
+- [Why Lisp? Why Common Lisp?](#why-lisp-why-common-lisp)
+- [How to Use This Book](#how-to-use-this-book)
+- [参考书目](#参考书目)
+
+<!-- markdown-toc end -->
+
 # Preface
 这本书涉及三个相关的主题：人工智能领域，计算机编程技能，以及编程语言 Common Lisp。
 
