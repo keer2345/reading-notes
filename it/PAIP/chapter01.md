@@ -18,7 +18,6 @@
 - [总结-Lisp评估规则](#总结-lisp评估规则)
 - [Lisp如何与众不同](#lisp如何与众不同)
 - [练习](#练习)
-- [解答](#解答)
 
 <!-- markdown-toc end -->
 
@@ -355,8 +354,59 @@ Lisp 的规则如下：
 # 练习
 - 新建一个 `last-name`，处理类似 "Rex Morgan MD," 和 "Morton Downey, Jr.," 的情况。
 - 写一个指数函数，类似 `(power 3 2)`，即 3 的平方等于 9。
+```lisp
+(defun power (x n)
+  "Power raises x to the nth power.  N must be an integer >= 0.
+   This executes in log n time, because of the check for even n."
+  (cond ((= n 0) 1)
+        ((evenp n) (expt (power x (/ n 2)) 2))
+        (t (* x (power x (- n 1))))))
+```
 - 计算表达式中原子的个数，例如 `(count-atoms '(a (b) c)) = 3`，需要考虑 `(a nil c)` 这样的情况。
+```lisp
+(defun count-atoms (exp)
+  "Return the total number of non-nil atoms in the expression."
+  (cond ((null exp) 0)
+        ((atom exp) 1)
+        (t (+ (count-atoms (first exp))
+              (count-atoms (rest exp))))))
+
+(defun count-all-atoms (exp &optional (if-null 1))
+  "Return the total number of atoms in the expression,
+  counting nil as an atom only in non-tail position."
+  (cond ((null exp) if-null)
+        ((atom exp) 1)
+        (t (+ (count-all-atoms (first exp) 1)
+              (count-all-atoms (rest exp) 0)))))
+```
 - 计算列表中元素出现的次数。
+```lisp
+(defun count-anywhere (item tree)
+  "Count the times item appears anywhere within tree."
+  (cond ((eql item tree) 1)
+        ((atom tree) 0)
+        (t (+ (count-anywhere item (first tree))
+              (count-anywhere item (rest tree))))))
+```
 - 计算用列表表示的两个数字序列的点积，例如 `(dot-product '(10 20) '(3 4)) = 10 x 3 + 20 x 4 = 110`
 
-# 解答
+三中方式：
+```lisp
+(defun dot-product (a b)
+  "Compute the mathematical dot product of two vectors."
+  (if (or (null a) (null b))
+      0
+      (+ (* (first a) (first b))
+         (dot-product (rest a) (rest b)))))
+
+(defun dot-product (a b)
+  "Compute the mathematical dot product of two vectors."
+  (let ((sum 0))
+    (dotimes (i (length a))
+      (incf sum (* (elt a i) (elt b i))))
+    sum))
+
+(defun dot-product (a b)
+  "Compute the mathematical dot product of two vectors."
+  (apply #'+ (mapcar #'* a b)))
+```
