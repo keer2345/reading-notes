@@ -5,14 +5,7 @@
 0. [Preface](https://github.com/keer2345/reading-notes/blob/main/it/PAIP/chapter00.md)
 ## Part I: Introduction to Common Lisp
 - 1 [Introduction to Lisp](https://github.com/keer2345/reading-notes/blob/main/it/PAIP/chapter01.md)
-- 2 [Preface](https://github.com/keer2345/reading-notes/blob/main/it/PAIP/chapter00.md)
-- 3 [Preface](https://github.com/keer2345/reading-notes/blob/main/it/PAIP/chapter00.md)
+- 2 [A Simple Lisp Program](https://github.com/keer2345/reading-notes/blob/main/it/PAIP/chapter02.md)
 ## Part II: Early AI Programs
-- 4 [ss]
-- 5 [ss]
-- 6 [ss]
 ## Part III: Tools and Techniques
-- 9 [ss]
-- 10 [hss]
-- 11 [ss]
 
