@@ -2,6 +2,20 @@
 
 通过学习词汇表，您将永远不会精通外语。 相反，您必须听和说（或读和写）该语言才能熟练。 学习计算机语言也是如此。
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [英语子集的语法](#英语子集的语法)
+- [直接的解决方案](#直接的解决方案)
+- [基于规则的解决方案](#基于规则的解决方案)
+    - [练习](#练习)
+- [双管齐下](#双管齐下)
+- [在不改变程序的情况下改变语法](#在不改变程序的情况下改变语法)
+- [对多个程序使用相同的数据](#对多个程序使用相同的数据)
+- [练习](#练习-1)
+
+<!-- markdown-toc end -->
+
 # 英语子集的语法
 下面是一小部分简单的英语语法：
 ```
@@ -247,3 +261,146 @@ Verb => hit, took, saw, liked...
 方法 2 涉及一个额外的步骤，因此对于小问题是更多的工作。然而，使用这种方法的程序通常更容易修改和扩展。在需要处理大量数据的领域中尤其如此。自然语言的语法就是这样一个领域——事实上，大多数AI问题都符合这种描述。方法 2 背后的思想是尽可能用它自己的术语处理问题，并尽量减少直接用 Lisp 编写的解决方案部分。
 
 幸运的是，在 Lisp 中设计新的注释非常容易——实际上就是新的编程语言。因此，Lisp 鼓励构建更健壮的程序。在本书中，我们将了解这两种方法。读者可能会注意到，在大多数情况下，我们会选择第二种。
+
+# 在不改变程序的情况下改变语法
+我们通过定义一种包括形容词、介词短语、专有名词和代词的新语法来说明方法 2 的效用。然后，我们可以应用 `generate` 函数而不需要修改这个新语法。
+
+```lisp
+(defparameter *bigger-grammar*
+  '((sentence -> (noun-phrase verb-phrase))
+    (noun-phrase -> (Article Adj* Noun PP*) (Name) (Pronoun))
+    (verb-phrase -> (Verb noun-phrase PP*))
+    (PP* -> () (PP PP*))
+    (Adj* -> () (Adj Adj*))
+    (PP -> (Prep noun-phrase))
+    (Prep -> to in by with on)
+    (Adj -> big little blue green adiabatic)
+    (Article -> the a)
+    (Name -> Pat Kim Lee Terry Robin)
+    (Noun -> man ball woman table)
+    (Verb -> hit took saw liked)
+    (Pronoun -> he she it these those that)))
+
+(setf *grammar* *bigger-grammar*)
+
+> (generate 'sentence)
+(A TABLE ON A TABLE IN THE BLUE ADIABATIC MAN SAW ROBIN
+ WITH A LITTLE WOMAN)
+
+> (generate 'sentence)
+(TERRY SAW A ADIABATIC TABLE ON THE GREEN BALL BY THAT WITH KIM
+ IN THESE BY A GREEN WOMAN BY A LITTLE ADIABATIC TABLE IN ROBIN
+ ON LEE)
+
+> (generate 'sentence)
+(THE GREEN TABLE HIT IT WITH HE)
+```
+# 对多个程序使用相同的数据
+用声明式形式表示信息的另一个优点是——作为规则或事实而不是Lisp函数——可以更容易地将信息用于多种目的。假设我们想要一个函数，它不仅能生成句子中的单词列表，还能生成句子完整语法的表示。例如，我们想要的不是列表（`a woman took a ball`），而是嵌套列表:
+```lisp
+(SENTENCE (NOUN-PHRASE (ARTICLE A) (NOUN WOMAN))
+          (VERB-PHRASE (VERB TOOK)
+                       (NOUN-PHRASE (ARTICLE A) (NOUN BALL))))
+```
+使用“直接函数（straightforward functions）”的方法，我们会陷入困境;我们必须重写每个函数来生成额外的结构。使用“（new notation）”方法，我们可以保持语法不变，只编写一个新函数:生成嵌套列表的一个版本。这两个变化是反对的类别到前面的每个重写，然后不附加在一起的结果，而只是列出他们与 `mapcar`：
+
+```lisp
+(defun generate-tree (phrase)
+  "Generate a random sentence or phrase,
+  with a complete parse tree."
+  (cond ((listp phrase)
+         (mapcar #'generate-tree phrase))
+        ((rewrites phrase)
+         (cons phrase
+               (generate-tree (random-elt (rewrites phrase)))))
+        (t (list phrase))))
+```
+```lisp
+> (generate-tree 'Sentence)
+(SENTENCE (NOUN-PHRASE (ARTICLE A)
+                       (ADJ*)
+                       (NOUN WOMAN)
+                       (PP*))
+      (VERB-PHRASE (VERB HIT)
+                       (NOUN-PHRASE (PRONOUN HE))
+                       (PP*)))
+
+> (generate-tree 'Sentence)
+(SENTENCE (NOUN-PHRASE (ARTICLE A)
+                       (NOUN WOMAN))
+          (VERB-PHRASE (VERB TOOK)
+                       (NOUN-PHRASE (ARTICLE A) (NOUN BALL))))
+```
+作为单数据/多程序方法的另一个示例，我们可以开发一个函数来生成短语的所有可能的重写。 该函数 `generate-all` 返回一个短语列表，而不只是一个短语，并且我们定义了一个辅助函数 `combining-all`，用于管理结果的组合。 另外，有四种情况，而不是三种情况，因为我们必须显式检查 `nil`。 完整的程序仍然非常简单：
+```lisp
+(defun generate-all (phrase)
+  "Generate a list of all possible expansions of this phrase."
+  (cond ((null phrase) (list nil))
+        ((listp phrase)
+         (combine-all (generate-all (first phrase))
+                      (generate-all (rest phrase))))
+        ((rewrites phrase)
+         (mappend #'generate-all (rewrites phrase)))
+        (t (list (list phrase)))))
+
+(defun combine-all (xlist ylist)
+  "Return a list of lists formed by appending a y to an x.
+  E.g., (combine-all '((a) (b)) '((1) (2)))
+  -> ((A 1) (B 1) (A 2) (B 2))."
+  (mappend #'(lambda (y)
+               (mapcar #'(lambda (x) (append x y)) xlist))
+           ylist))
+```
+我们现在可以使用 `generate-all` 来测试我们原来的小语法。请注意，`generate-all` 的一个严重缺点是它不能处理 `*bigger-grammar*` 中出现的 `Adj* * => Adj + Adj*`之类的递归语法规则，因为这些规则会导致无限数量的输出。但是它对有限的语言很有效，比如由 `*simple-grammar*` 生成的语言:
+
+```lisp
+> (generate-all 'Article)
+
+((THE) (A))
+
+> (generate-all 'Noun)
+
+((MAN) (BALL) (WOMAN) (TABLE))
+
+> (generate-all 'noun-phrase)
+((A MAN) (A BALL) (A WOMAN) (A TABLE)
+ (THE MAN) (THE BALL) (THE WOMAN) (THE TABLE))
+
+> (length (generate-all 'sentence))
+256
+```
+它有 256 个句子，因为每个句子的形式都是：*Article-Noun-Verb-Article-Noun*，有两个冠词，四个名词和四个动词 `(2 x 4 x 4 x 2 x 4 = 256)`。
+
+# 练习
+- 描述 `combine-all` 的一种方法是计算附加在参数列表上的函数的叉乘。写出高阶函数的交叉积，并以此定义组合。
+```lisp
+(defun cross-product (fn xlist ylist)
+  "Return a list of all (fn x y) values."
+  (mappend #'(lambda (y)
+               (mapcar #'(lambda (x) (funcall fn x y))
+                       xlist))
+           ylist))
+
+(defun combine-all (xlist ylist)
+  "Return a list of lists formed by appending a y to an x"
+  (cross-product #'append xlist ylist))
+Now we can use the cross-product in other ways as well:
+
+> (cross-product #'+ '(1 2 3) '(10 20 30))
+(11 12 13
+ 21 22 23
+ 31 32 33)
+
+> (cross-product #'list '(a b c d e f g h)
+                        '(1 2 3 4 5 6 7 8))
+((A 1) (B 1) (C 1) (D 1) (E 1) (F 1) (G 1) (H 1)
+ (A 2) (B 2) (C 2) (D 2) (E 2) (F 2) (G 2) (H 2)
+ (A 3) (B 3) (C 3) (D 3) (E 3) (F 3) (G 3) (H 3)
+ (A 4) (B 4) (C 4) (D 4) (E 4) (F 4) (G 4) (H 4)
+ (A 5) (B 5) (C 5) (D 5) (E 5) (F 5) (G 5) (H 5)
+ (A 6) (B 6) (C 6) (D 6) (E 6) (F 6) (G 6) (H 6)
+ (A 7) (B 7) (C 7) (D 7) (E 7) (F 7) (G 7) (H 7)
+ (A 8) (B 8) (C 8) (D 8) (E 8) (F 8) (G 8) (H 8))
+```
+
+这里的寓意是让您的代码尽可能通用，因为您永远不知道接下来要用它做什么。
