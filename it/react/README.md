@@ -3,18 +3,24 @@
 # Videos of Youtube
 ## Author
 - [Dev Ed](https://www.youtube.com/c/DevEd/playlists)
+  - [Build A Todo App With REACT | React Project For Beginners (FULL)](https://www.youtube.com/watch?v=pCA4qpQDZD8)
 
 - [Traversy Media](https://www.youtube.com/c/TraversyMedia/playlists)
   - `DONE` [react-crash-todo](https://www.youtube.com/watch?v=sBws8MSXN7A): My practice source code of this tutorial at [here](https://github.com/keer2345/react-crash-todo), it include crud local, [react-router](https://github.com/ReactTraining/react-router) and [axios](https://github.com/axios/axios).
   - `ing...(2/7 18'00")` [Full Stack React & Django](https://www.youtube.com/watch?v=Uyei2iDA4Hs&list=PLillGF-RfqbbRA-CIUxlxkUpbq0IFkX60)
   - `ing...(1/31 26'00")` [React Projects](https://www.youtube.com/watch?v=XuFDcZABiDQ&list=PLillGF-RfqbY3c2r0htQyVbDJJoBFE6Rb): In this project we will take a vanilla JS expense tracker app and turn it into a React app using hooks (useState, useContext, useReducer) and the context API.
+  - [Build a GitHub Jobs App With React Hooks](https://www.youtube.com/watch?v=fxY1q4SCB64)
 
   - [React Admin Crash Course](https://www.youtube.com/watch?v=HRmdj-HpJyE)
 - [Bitfumes](https://www.youtube.com/channel/UC_hG9fglfmShkwex1KVydHA)
   - [React JS Tutorial - Full Course 10 Hours (2020)](https://www.youtube.com/watch?v=I6tbhNUU96Y)
 - [freeCodeCamp.org](https://www.youtube.com/channel/UC8butISFwT-Wl7EV0hUK0BQ)
   - `ing...` [Full Stack React & Firebase Tutorial - Build a social media app](https://www.youtube.com/watch?v=m_u6P5k0vP0)
-
+- [Tyler Potts](https://www.youtube.com/channel/UCBBGM84ZOs7z5jpTQAaZ_Hg)
+  - `DONE` [Build a Movie APP With React | React Tutorial for Beginners](https://youtu.be/ufodJVcpmps): My practice source code of this tutorial at [here](https://github.com/keer2345/react-movie-database).
+  - [Learn REACTJS by Making a Reddit Feed App](https://www.youtube.com/watch?v=rP-ZARMGY10&list=PLR8vUZDE6IeNFRpeXZ0vSb4csqp1x5F3Q)
+- [Coding Addict](https://www.youtube.com/channel/UCMZFwxv5l-XtKi693qMJptA)
+  - [React Project - Beach Resort](https://www.youtube.com/watch?v=ScDWrogElmo)
 
 
 ## Videos
