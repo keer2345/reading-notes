@@ -7,6 +7,6 @@
 
 目录：
 
-- [开始](https://github.com/keer2345/reading-notes/blob/main/it/the-common-lisp-cookbook/chapter01.md)
-- [编辑器](https://github.com/keer2345/reading-notes/blob/main/it/the-common-lisp-cookbook/chapter02.md)
-- [函数](https://github.com/keer2345/reading-notes/blob/main/it/the-common-lisp-cookbook/chapter03.md)
+- [开始](https://github.com/keer2345/reading-notes/blob/main/it/lisp/the-common-lisp-cookbook/chapter01.md)
+- [编辑器](https://github.com/keer2345/reading-notes/blob/main/it/lisp/the-common-lisp-cookbook/chapter02.md)
+- [函数](https://github.com/keer2345/reading-notes/blob/main/it/lisp/the-common-lisp-cookbook/chapter03.md)
