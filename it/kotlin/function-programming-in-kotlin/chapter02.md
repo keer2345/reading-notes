@@ -166,6 +166,7 @@ fun findFirst(ss: Array<String>, key: String): Int {
             ss[n] == key -> n
             else -> loop(n + 1)
         }
+
 	return loop(0)
 }
 
@@ -173,4 +174,124 @@ fun findFirst(ss: Array<String>, key: String): Int {
 fun main() {  
     println(findFirst(arrayOf("3","4","5","6"), "5"))
 }
+```
+这里先不讨论代码的详细实现，重点是我们如何通过 `findFirst` 在 `Array<String>` 搜索 `String`，在 `Array<Int>` 搜索 `Int`，或者在 `Array<A>` 搜索指定的 `A` 类型。：
+```kotlin
+fun findFirst(ss: Array<String>, key: String): Int {
+    tailrec fun loop(n: Int): Int =
+    	when {
+            n >= ss.size -> -1
+            ss[n] == key -> n
+            else -> loop(n + 1)
+        }
+	return loop(0)
+}
+
+fun <A> findFirst(xs: Array<A>, p: (A) -> Boolean): Int {
+    tailrec fun loop(n: Int): Int =
+    	when {
+            n >= xs.size -> -1
+            p(xs[n]) -> n
+            else -> loop(n + 1)
+        }
+        
+     return loop(0)
+}
+
+fun main() {  
+    println(findFirst(arrayOf("3","4","5","6"), "5"))
+    println(findFirst<Int>(arrayOf(4,5,6,7), {it == 7}))
+}
+```
+
+这是个多态函数的例子，将数组的类型和函数抽象化用于查找。编写一个多态函数，通常在函数名前面加上类似 `<A>`，也可以将参数类型定义为我们想要的——`<Foo, Bar, Baz`，或者 `<TheParameter, another_good_one>` 等合法类型的声明，按照惯例，我们一般使用简短的单个大写字母，类似 `<A, B, C>`。
+
+
+函数 `findFirst` 的 `A` 在两个地方引用：`Array<A>` 和 `p:(A) -> Boolean`，因此这两处必须是相同的类型 `A`，如果我们尝试在 `Array<Int>` 中查找 `String` 就会报错。
+
+**练习 2.2**
+实现 `isSorted`，校验是否是已排序的列表。`List<A>` 根据给定的比较函数来排序，该函数之前先添加两个 `List` 的 `head` 和 `tail` 两个扩展属性：
+```kotlin
+val <T> List<T>.tail: List<T> 
+    get() = drop(1)
+
+val <T> List<T>.head: T
+    get() = first()
+    
+fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean {
+    tailrec fun loop(n:Int):Boolean = 
+    	when {
+            n >= aa.size - 1 -> true
+            order(aa[n+1], aa[n]) -> false
+            else -> loop(n+1)
+        }
+    
+    return loop(0)
+}
+
+fun main() {   
+    println(isSorted(listOf(1,2,3,4)) { a,b -> b > a})
+    println(isSorted(listOf(1,3,2,4)) { a,b -> b > a})
+    println(isSorted(listOf("a","b","c","d")) { a,b -> b < a})
+}
+```
+
+**扩展方法和属性**
+
+我们可以很容易将行为通过扩展方法的方式添加到给定类型的所有实例中：
+```kotlin
+fun Int.show(): String = "The value of this Int is $this"
+```
+结果：
+```kotlin
+>>> 1.show()
+res1: kotlin.String = The value of this Int is 1
+```
+
+类似地，我们可以公开所有实例的属性：
+```kotlin
+val Int.show: String
+    get() = "The value of this Int is $this"
+```
+
+结果：
+```kotlin
+>>> 1.show()
+res2: kotlin.String = The value of this Int is 1
+```
+
+这些扩展方法和属性是静态分派的，换句话说，我们实际上并没有修改底层类。被调用的扩展函数由调用该函数的表达式的类型决定，而不是由运行时对该表达式求值的结果的类型决定。
+
+## 通过匿名函数调用高阶函数
+使用高阶函数时，使用匿名函数调用时很方便的，例如前面说到的 `findFirst`：
+```kotlin
+findFirst(arrayOf(7, 9, 13), { i: Int -> i == 9 })
+```
+# 类型的实现
+偏函数：
+```kotlin
+fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C = TODO()
+```
+```kotlin
+fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
+        { b: B -> TODO() }
+```
+```kotlin
+fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
+        { b: B -> f(a, b) }
+```
+
+**练习2.3**
+```kotlin
+fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C = TODO()
+```
+
+**练习2.4**
+```kotlin
+fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C = TODO()
+```
+
+**练习2.5**
+```kotlin
+fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C = TODO()
 ```
