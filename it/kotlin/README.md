@@ -8,3 +8,7 @@
 - [The Joy of Kotlin](https://www.manning.com/books/the-joy-of-kotlin?query=kotlin)
 - [Building Spring Boot Applications with the Kotlin Programming Language](https://www.manning.com/livevideo/building-spring-boot-applications-with-the-kotlin-programming-language)
 
+
+# Kotlin in Spring Boot
+## Articles
+- [How to create a REST API for your App with Spring Boot, Kotlin & Gradle](notes/56184849c38d44329fea419595819cab.md)
