@@ -4,4 +4,5 @@
 - [Java](https://github.com/keer2345/reading-notes/tree/main/it/java)
 - [Kotlin](https://github.com/keer2345/reading-notes/tree/main/it/kotlin)
 - [Lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp)
+- [Python](https://github.com/keer2345/reading-notes/tree/main/it/python)
 - [React JS](https://github.com/keer2345/reading-notes/tree/main/it/react)
