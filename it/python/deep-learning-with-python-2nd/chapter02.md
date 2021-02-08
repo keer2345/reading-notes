@@ -174,3 +174,139 @@ test_acc: 0.9783999919891357
 # 神经网络的数据表示
 
 *Data representations for neural networks*
+
+在前面的示例中，我们从存储在多维NumPy数组（也称为张量 *tensors*）中的数据开始。通常，所有当前的机器学习系统都使用张量作为其基本数据结构。 张量是该领域的基础-TensorFlow以其命名为基础。 那么什么是张量？
+
+张量的核心是数据的容器，通常是数字数据。 因此，它是数字的容器。 您可能已经熟悉矩阵，它们是2级张量：张量是矩阵到任意数量维的一般化（请注意，在张量的上下文中，维通常称为轴）。
+
+## 标量（0阶张量）
+
+*Scalars (rank-0 tensors)*
+
+仅包含一个数字的张量称为标量（或标量张量，或 `rank-0` 张量，或 `0D` 张量）。 在 NumPy 中，`float32` 或 `float64` 数字是标量张量（或标量数组）。 您可以通过 `ndim` 属性显示 NumPy 张量的轴数。 标量张量具有 `0` 个轴（`ndim == 0`）。 张量的轴数也称为其等级。 这是NumPy标量：
+
+```python
+In [21]: import numpy as np
+
+In [22]: x = np.array(12)
+
+In [23]: x
+Out[23]: array(12)
+
+In [24]: x.ndim
+Out[24]: 0
+```
+
+## 矢量（1阶张量）
+
+*Vectors (rank-1 tensors)*
+
+
+数字数组称为向量，或1级张量，或 `1D` 张量。 1级张量据说恰好具有一个轴。 以下是NumPy向量：
+```python
+In [25]: x = np.array([12, 3, 6, 14, 7])
+
+In [26]: x
+Out[26]: array([12,  3,  6, 14,  7])
+
+In [27]: x.ndim
+Out[27]: 1
+```
+
+该向量有五个条目，因此称为5维向量。 不要将5D向量与5D张量混淆！ 5D向量仅具有一个轴，并且沿其轴具有五个维度，而5D张量具有五个轴（并且沿每个轴可以具有任意数量的维度）。维度可以表示沿特定轴的条目数（例如5D矢量），也可以表示张量中的轴数（例如5D张量），这有时会造成混淆。 在后一种情况下，谈论等级5的张量（张量的等级是轴数）在技术上更正确，但无论如何，模糊的符号5D张量都是常见的。
+
+## 矩阵（2阶张量）
+
+*Matrices (rank-2 tensors)*
+
+```python
+In [28]: x = np.array([[5, 78, 2, 34, 0],
+    ...:               [6, 79, 3, 35, 1],
+    ...:               [7, 80, 4, 36, 2]])
+
+In [29]: x.ndim
+```
+
+## 三阶及更高阶的张量
+
+*Rank-3 tensors and higher-rank tensors*
+
+```python
+In [31]: x = np.array([[[5, 78, 2, 34, 0],
+    ...:                [6, 79, 3, 35, 1],
+    ...:                [7, 80, 4, 36, 2]],
+    ...:               [[5, 78, 2, 34, 0],
+    ...:                [6, 79, 3, 35, 1],
+    ...:                [7, 80, 4, 36, 2]],
+    ...:               [[5, 78, 2, 34, 0],
+    ...:                [6, 79, 3, 35, 1],
+    ...:                [7, 80, 4, 36, 2]]])
+
+In [32]: x.ndim
+Out[32]: 3
+```
+
+通过将 3 阶张量打包在一个数组中，可以创建 4 阶张量，依此类推。 在深度学习中，通常会处理等级 0 到 4 的阶张量，但如果处理视频数据则可能会增加到 5 阶。
+
+## 关键属性
+
+*Key attributes*
+
+张量由三个关键属性定义：
+- 轴的数目（等级）——例如，一个3阶张量有三个轴，一个矩阵有两个轴。这在Python库中也被称为张量的ndim，如NumPy或TensorFlow。
+- 形状——这是一个整数元组，描述张量沿着每个轴的尺寸。 例如，前一个矩阵示例的形状为 `(3，5)`，3阶张量示例的形状为 `(3，3，5)`。 向量的形状只有一个元素，例如 `(5，)`，而标量的形状是空的 `()`。
+- 据类型（在Python库中通常称为 `dtype`）——这是张量中包含的数据的类型； 例如，张量的类型可以是 `float16`，`float32`，`float64`，`uint8` 等。 在 TensorFlow 中，您也可能会遇到字符串张量。
+
+为了更具体一点，让我们回顾一下在MNIST示例中处理的数据。 首先，我们加载MNIST数据集：
+
+```python
+In [33]: from keras.datasets import mnist
+
+In [34]: (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+```
+
+接下来，我们显示张量 `train_images` 的轴数，即 `ndim` 属性：
+
+```python
+In [35]: print(train_images.ndim)
+3
+```
+
+它的形状：
+```python
+In [36]: print(train_images.shape)
+(60000, 28, 28)
+```
+
+数据类型，也就是 `dtype` 属性：
+```python
+In [37]: print(train_images.dtype)
+uint8
+```
+
+所以我们这里是8位整数的3级张量。 更精确地说，它是由60,000个28×28整数矩阵组成的数组。 每个此类矩阵都是灰度图像，系数在0到255之间。
+
+让我们使用Matplotlib库（标准科学Python套件的一部分）在此3级张量中显示第四个数字：
+```python
+In [3]: digit = train_images[4]
+
+In [4]: import matplotlib.pyplot as plt
+
+In [5]: plt.imshow(digit, cmap=plt.cm.binary)
+Out[5]: <matplotlib.image.AxesImage at 0x1426dc970>
+
+In [6]: plt.show()
+```
+
+![](https://drek4537l1klr.cloudfront.net/chollet2/v-4/Figures/The-fourth-sample-in-our-dataset.png)
+
+自然地，相应的标签只是整数9：
+
+```python
+In [7]: train_labels[4]
+Out[7]: 9
+```
+
+## 在NumPy中操纵张量
+
+*Manipulating tensors in NumPy*
