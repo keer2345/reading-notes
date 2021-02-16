@@ -10,6 +10,16 @@
 
 ![](https://drek4537l1klr.cloudfront.net/apeltsin/v-5/Figures/fig_p1-1.png)
 
+- [Sample Space Analysis: An Equation-Free Approach for Measuring Uncertainty in Outcomes](#sample-space-analysis-an-equation-free-approach-for-measuring-uncertainty-in-outcomes)
+  - [Analyzing a Biased Coin](#analyzing-a-biased-coin)
+- [Computing Non-Trivial Probabilities](#computing-non-trivial-probabilities)
+  - [Problem 1: Analyzing a Family with 4 Children](#problem-1-analyzing-a-family-with-4-children)
+  - [Problem 2: Analyzing Multiple Dice Rolls](#problem-2-analyzing-multiple-dice-rolls)
+  - [Problem 3: Computing Dice-Roll Probabilities using Weighted Sample Spaces](#problem-3-computing-dice-roll-probabilities-using-weighted-sample-spaces)
+- [Computing Probabilities Over Interval Ranges](#computing-probabilities-over-interval-ranges)
+  - [Evaluating Extremes Using Interval Analysis](#evaluating-extremes-using-interval-analysis)
+- [Summary](#summary)
+
 **This section covers:**
 - What are the basics of probability theory?
 - Computing probabilities of a single observation.
@@ -273,3 +283,158 @@ assert prob == compute_event_probability(has_sum_of_21, sample_space)
 ```
 
 ## Problem 3: Computing Dice-Roll Probabilities using Weighted Sample Spaces
+
+Let's recompute that probability using a weighted sample space. How do we convert our unweighted sample-space set into a weighted sample-space dictionary? The solution is simple. We must first identify all possible sums of 6 dice-rolls. Then, we must count the number of times each sum appears across all possible 6-dice-rolls-combinations. These combinations are already stored in our computed `sample_space` set. By mapping the dice-roll sums to their occurence counts, we will produce a `weighted_sample_space` result.
+
+Mapping dice-roll sums to ocurrence counts:
+```python
+from collections import defaultdict
+weighted_sample_space = defaultdict(int)
+for outcome in sample_space:
+    total = sum(outcome)
+    weighted_sample_space[total] += 1
+```
+```python
+assert weighted_sample_space[6] == 1
+assert weighted_sample_space[36] == 1
+```
+
+Checking a more common dice-roll combination:
+
+```python
+num_combinations = weighted_sample_space[21]
+print(f"There are {num_combinations } ways for six rolled dice to sum to 21")
+```
+Result:
+```
+There are 4332 ways for six rolled dice to sum to 21
+```
+
+Exploring different ways of summing to 21:
+```python
+assert sum([4, 4, 4, 4, 3, 2]) == 21
+assert sum([4, 4, 4, 5, 3, 1]) == 21
+
+event = get_event(lambda x: sum(x) == 21, sample_space)
+assert weighted_sample_space[21] == len(event)
+assert sum(weighted_sample_space.values()) == len(sample_space)
+
+assert sum(weighted_sample_space.values()) == 6 * 6 * 6 * 6 * 6 * 6
+```
+
+Let's now recompute the probability using the `weighted_sample_space` dictionary. The final probability of rolling a 21 should remain unchanged.
+
+
+Computing the weighted event probability of dice rolls:
+```python
+prob = compute_event_probability(lambda x: x == 21, weighted_sample_space)
+assert prob == compute_event_probability(has_sum_of_21, sample_space)
+print(f"Probability of dice summing to 21 is {prob}")
+```
+Result:
+```
+Probability of dice summing to 21 is 0.09284979423868313
+```
+
+What is the benefit of using a weighted sample space over an unweighted one? Less memory usage! As we see below, the unweighted sample_space set has on the order of *1500x* more elements than the weighted sample space dictionary.
+
+Comparing weighted to unweighted event space size:
+```python
+print('Number of Elements in Unweighted Sample Space:')
+print(len(sample_space))
+print('Number of Elements in Weighted Sample Space:')
+print(len(weighted_sample_space))
+```
+Result:
+```
+Number of Elements in Unweighted Sample Space:
+46656
+Number of Elements in Weighted Sample Space:
+31
+```
+# Computing Probabilities Over Interval Ranges
+So far, we’ve only analyzed event conditions that satisfy some single value. Now, we’ll analyze event conditions that span across intervals of values. An **interval** is the set of all the numbers that are sandwiched between two boundary cutoffs. Let's define an `is_in_interval` function that checks whether a number falls within a specified interval. We’ll control the interval boundaries by passing a `minimum` and a `maximum` parameter.
+```python
+def is_in_interval(number, minimum, maximum):
+    return minimum <= number <= maximum
+```
+Given the `is_in_interval` function, we can compute the probability that an event’s associated value falls within some numeric range. For instance, let’s compute the likelihood that our 6 consecutive dice-rolls sum up to a value between 10 and 21.
+
+Computing the probability over an interval:
+```python
+prob = compute_event_probability(lambda x: is_in_interval(x, 10, 21),
+                                 weighted_sample_space)
+print(f"Probability of interval is {prob}")
+```
+Result:
+```
+Probability of interval is 0.5446244855967078
+```
+
+## Evaluating Extremes Using Interval Analysis
+
+Interval analysis（区间分析） is critical to solving a whole class of very important problems in probability and statistics. One such problem involves the evaluation of extremes. The problem boils down to whether observed data is too extreme to be believable.
+
+Data seems extreme when it is too unusual to have occurred by random chance. 
+
+We’ll find our answer by computing an interval probability. However, first we need the sample space for every possible sequence of 10 flipped coins. Let's generate a weighted sample space. As previously discussed, this is more efficient than using a non-weighted representation.
+
+Computing the sample space for 10 coin-flips:
+```python
+def generate_coin_sample_space(num_flips=10):
+    weighted_sample_space = defaultdict(int)
+    for coin_flips in product(['Heads', 'Tails'], repeat=num_flips):
+        heads_count = len([outcome for outcome in coin_flips
+                          if outcome == 'Heads'])
+        weighted_sample_space[heads_count] += 1
+
+    return weighted_sample_space
+
+weighted_sample_space = generate_coin_sample_space()
+assert weighted_sample_space[10] == 1
+assert weighted_sample_space[9] == 10
+```
+```python
+prob = compute_event_probability(lambda x: is_in_interval(x, 8, 10),
+                                 weighted_sample_space)
+print(f"Probability of observing more than 7 heads is {prob}")
+```
+Result:
+```
+Probability of observing more than 7 heads is 0.0546875
+```
+
+Let's formulate the problem as follows; what is the probability that 10 fair coin-flips produce either 0 to 2 heads or 8 to 10 heads? Or, stated more concisely, what is the probability that the coin-flips do NOT produce between 3 and 7 heads? That probability is computed below.
+
+Computing an extreme interval probability:
+
+```python
+prob = compute_event_probability(lambda x: not is_in_interval(x, 3, 7),
+                                 weighted_sample_space)
+print(f"Probability of observing more than 7 heads or 7 tails is {prob}")
+```
+Result:
+```
+Probability of observing more than 7 heads or 7 tails is 0.109375
+```
+
+Analyzing extreme head-counts for 20 fair coin-flips:
+```python
+weighted_sample_space_20_flips = generate_coin_sample_space(num_flips=20)
+prob = compute_event_probability(lambda x: not is_in_interval(x, 5, 15),
+                                 weighted_sample_space_20_flips)
+print(f"Probability of observing more than 15 heads or 15 tails is {prob}")
+```
+Result:
+```
+Probability of observing more than 15 heads or 15 tails is 0.01181793212890625
+```
+
+The updated probability has dropped from approximately .1 to approximately .01. Thus, the added evidence has caused a 10-fold decrease in our confidence of fairness. Despite this probability drop, the ratio of heads to tails has remained constant at 4-to-1. Both our original and updated experiments produced 80% heads and 20% tails. This leads to an interesting an question: why does the probability of observing 80% or more heads decrease as the supposedly fair coin gets flipped more times? We can find out through detailed mathematical analysis. However, a much more intuitive solution is to just visualize the distribution of head-counts across our 2 sample space dictionaries. The visualization would effectively be a plot of keys (head-counts) vs values (combination counts) present in each dictionary. We can carry out this plot using Matplotlib; Python’s most popular visualization library. In the subsequent section, we will discuss Matplotlib usage, and its application to probability theory.
+
+# Summary
+- A sample space is the set of all the possible outcomes that an action can produce.
+- An event is a subset of the sample space containing just those outcomes that satisfy some event condition. An event condition is a Boolean function that takes as input an outcome and returns either True or False.
+- The probability of an event equals the fraction of event outcomes that cover the entire sample space.
+- Probabilities can be computed over numeric intervals. An interval is defined as the set of all the numbers that are sandwiched between two boundary values.
+- Interval probabilities are useful for determining whether an observation appears extreme.
