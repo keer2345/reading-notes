@@ -7,10 +7,25 @@ These skills of this book include:
 - Key data science libraries such as NumPy, SciPy, Pandas, Matplotlib and Scikit-Learn.
 - Open-ended problem-solving abilities.
 
+ ## Python Jupyterlab Environment
+
+ ### Install
+ ```
+ pip install jupyterlab
+
+ pip install jupyterlab_code_formatter
+ pip install black isort
+ ```
+
+ ### Run
+ ```
+ jupyter lab
+ ```
+
 
 ## Part 1. Case Study 1: Finding the Winning Strategy in a Card Game
 1. [Computing Probabilities Using Python](chapter01.md)
-2. [Plotting Probabilities Using Matplotlib](chapter02.ibpynb)
+2. [Plotting Probabilities Using Matplotlib](chapter02.ipynb)
 3. Running Random Simulations in NumPy
 5. Case Study 1 Solution
 
