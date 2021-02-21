@@ -26,7 +26,7 @@ These skills of this book include:
 ## Part 1. Case Study 1: Finding the Winning Strategy in a Card Game
 1. [Computing Probabilities Using Python](chapter01.md)
 2. [Plotting Probabilities Using Matplotlib](chapter02.ipynb)
-3. Running Random Simulations in NumPy
+3. [Running Random Simulations in NumPy](chapter03.ipynb)
 5. Case Study 1 Solution
 
 - Part 2. Case Study 2: Assessing Online Ad-Clicks for Significance
