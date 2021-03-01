@@ -1,4 +1,4 @@
-**[Introduction: Why Lisp?](http://www.gigamonkeys.com/book/introduction-why-lisp.html)**
+**[1. Introduction: Why Lisp?](http://www.gigamonkeys.com/book/introduction-why-lisp.html)**
 
 - [Why Lisp?](#why-lisp)
 - [Where It Began](#where-it-began)

@@ -10,8 +10,8 @@
 
 
 1. [Introduction: Why Lisp?](chapter01.md)
-1. Lather, Rinse, Repeat: A Tour of the REPL
-1. Practical: A Simple Database
+1. [Lather, Rinse, Repeat: A Tour of the REPL](chapter02.md)
+1. [Practical: A Simple Database](chapter03.md)
 1. Syntax and Semantics
 1. Functions
 1. Variables
