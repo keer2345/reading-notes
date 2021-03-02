@@ -12,7 +12,7 @@
 1. [Introduction: Why Lisp?](chapter01.md)
 1. [Lather, Rinse, Repeat: A Tour of the REPL](chapter02.md)
 1. [Practical: A Simple Database](chapter03.md)
-1. Syntax and Semantics
+1. [Syntax and Semantics](chapter04.md)
 1. Functions
 1. Variables
 1. Macros: Standard Control Constructs
