@@ -9,3 +9,5 @@
 - [dept-info.labri.fr](https://dept-info.labri.fr/~strandh/Teaching/MTP/Common/David-Lamkins/)
 - [lispworks.com](http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm)
 - [CFFI User Manual](https://common-lisp.net/project/cffi/manual/cffi-manual.html)
+- [Common Lisp the Language, 2nd Edition](https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/clm.html)
+- [Let Over Lambda—50 Years of Lisp](https://letoverlambda.com/)
