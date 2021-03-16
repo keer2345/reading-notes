@@ -11,3 +11,8 @@
 - [CFFI User Manual](https://common-lisp.net/project/cffi/manual/cffi-manual.html)
 - [Common Lisp the Language, 2nd Edition](https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/clm.html)
 - [Let Over Lambda—50 Years of Lisp](https://letoverlambda.com/)
+- [http://csci.viu.ca](csci.viu.ca/~wesselsd/)
+    - [(gnu) common lisp: features and functions](http://csci.viu.ca/~wesselsd/courses/csci330/code/lisp/index.html)
+- [CEPL](https://www.youtube.com/playlist?list=PL2VAYZE_4wRKKr5pJzfYD1w4tKCXARs5y)
+- [Little bits of lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp/little-bits-of-lisp)
+- [Programming Algorithms in Lisp](http://vseloved.github.io/progalgs.html)
