@@ -8,7 +8,7 @@
 - [英语子集的语法](#英语子集的语法)
 - [直接的解决方案](#直接的解决方案)
 - [基于规则的解决方案](#基于规则的解决方案)
-    - [练习](#练习)
+  - [练习](#练习)
 - [双管齐下](#双管齐下)
 - [在不改变程序的情况下改变语法](#在不改变程序的情况下改变语法)
 - [对多个程序使用相同的数据](#对多个程序使用相同的数据)
@@ -228,7 +228,7 @@ Verb => hit, took, saw, liked...
 ```
 
 ## 练习
-- 自己写个  `generate` 函数，使用 `cond` 但是两次调用 `rewrites`：
+- 自己写个  `generate` 函数，使用 `cond` 避免两次调用 `rewrites`：
 ```lisp
 (defun generate (phrase)
 "Generate a random sentence or phrase"
@@ -302,6 +302,9 @@ Verb => hit, took, saw, liked...
           (VERB-PHRASE (VERB TOOK)
                        (NOUN-PHRASE (ARTICLE A) (NOUN BALL))))
 ```
+
+![](https://raw.githubusercontent.com/norvig/paip-lisp/master/docs/images/chapter2/f02-01.jpg)
+
 使用“直接函数（straightforward functions）”的方法，我们会陷入困境;我们必须重写每个函数来生成额外的结构。使用“（new notation）”方法，我们可以保持语法不变，只编写一个新函数:生成嵌套列表的一个版本。这两个变化是反对的类别到前面的每个重写，然后不附加在一起的结果，而只是列出他们与 `mapcar`：
 
 ```lisp
