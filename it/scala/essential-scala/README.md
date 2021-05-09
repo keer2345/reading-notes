@@ -1,6 +1,6 @@
 <div align="center">
 
-# [Essential](https://books.underscore.io/essential-scala/essential-scala.html)
+# [Essential Scala](https://books.underscore.io/essential-scala/essential-scala.html)
 
 ![](https://underscore.io/images/books/essential-scala.png)
 
