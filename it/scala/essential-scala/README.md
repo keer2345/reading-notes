@@ -1,16 +1,15 @@
 <center>
-<h1>
-[Essential](https://books.underscore.io/essential-scala/essential-scala.html)
-</h1>
-</center>
+# [Essential](https://books.underscore.io/essential-scala/essential-scala.html)
 
 ![](https://underscore.io/images/books/essential-scala.png)
+
+</center>
 
 > Author: Noel Welsh, Dave Gurnell
 >
 > Version 1.3, April 2017
 
-# 前言
+## 前言
 
 本书面对的是首次学习 Scala 的程序员，我们假设你熟悉面向对象的编程语言（类似 Java），但只有一些或者没有函数式编程的经验。
 
@@ -20,6 +19,6 @@
 
 Essential Scala 由 [Underscore](http://underscore.io/) 的 [Noel Welsh](http://noelwelsh.com/) [Dave Gurnell](http://davegurnell.com/) 编写，通过 [Underscore’s eBook Template]() 构建，纯文本，并对函数式编程有着深厚的热爱。
 
-# 目录
+## 目录
 
 1. [入门](ch01.md)
