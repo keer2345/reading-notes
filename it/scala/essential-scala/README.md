@@ -23,3 +23,4 @@ Essential Scala 由 [Underscore](http://underscore.io/) 的 [Noel Welsh](http://
 ## 目录
 
 1. [入门](ch01.md)
+1. [表达式、类型、和值](ch02.md)
