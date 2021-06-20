@@ -4,3 +4,4 @@
 
 1. [Introduction](ch01.md)
 1. [A taste of Scalatra](ch02.md)
+1. [Routing](ch03.md)
