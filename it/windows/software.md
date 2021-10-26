@@ -4,6 +4,5 @@
 - Sublime Text 3
 - XAMPP
 - Redis
-- Git
-  - MinGW64
-  - [Msys32-64bit](https://mirror.tuna.tsinghua.edu.cn/help/msys2/)， [说明](https://www.cnblogs.com/juluwangshier/p/12015699.html)
+- [Msys32-64bit](https://mirror.tuna.tsinghua.edu.cn/help/msys2/)
+  - [Windows安装MSYS2_切换zsh_整合cmder](https://www.cnblogs.com/wufeiyun/p/12055702.html)
