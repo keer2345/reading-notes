@@ -8,6 +8,7 @@
 - [Lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp)
 - [Python](https://github.com/keer2345/reading-notes/tree/main/it/python)
 - [React JS](https://github.com/keer2345/reading-notes/tree/main/it/react)
+- [Ruby](https://github.com/keer2345/reading-notes/tree/main/it/ruby)
 - [Scala](https://github.com/keer2345/reading-notes/tree/main/it/scala)
 - [Vue JS](https://github.com/keer2345/reading-notes/tree/main/it/vue)
 - [Windows配置](https://github.com/keer2345/reading-notes/tree/main/it/windows)
