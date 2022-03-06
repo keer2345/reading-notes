@@ -2,3 +2,5 @@
 
 - [lesson 03](lesson03.md)
 - [lesson 04](lesson04.md)
+- [lesson 05](lesson05.md)
+- [lesson 06](lesson06.md)
