@@ -9,6 +9,7 @@
 - Beginning Spring
 - Beginning Spring 5
 - Java 多线程编程核心技术(第 2 版)
+- [Java Concurrency and Multithreading Tutorial](https://github.com/keer2345/reading-notes/tree/main/it/java/Java-Concurrency-and-Multithreading-Tutorial)
 
 ## Blog
 
