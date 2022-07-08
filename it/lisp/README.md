@@ -16,3 +16,6 @@
 - [Little bits of lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp/little-bits-of-lisp)
 - [Programming Algorithms in Lisp](http://vseloved.github.io/progalgs.html)
 - [Lisp of Simon Fraser University](https://github.com/keer2345/reading-notes/tree/main/it/lisp/lisp-of-sfu)
+
+# Practices
+- [Neil Munro Serials](./neil-munro-serials)
