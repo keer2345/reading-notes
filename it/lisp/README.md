@@ -19,4 +19,4 @@
 
 # Practices
 ## Quicklisp
-- [Neil Munro Serials](./neil-munro-serials)
+- [Neil Munro Serials](./quicklisp/neil-munro-serials)
