@@ -10,8 +10,10 @@
 
 # Materials
 ## Learning Kotlin
-- [Kotlin Course - Tutorial for Beginners](https://www.youtube.com/watch?v=F9UC9DY-vIU)
 - [exercism.org/tracks/kotlin](https://exercism.org/tracks/kotlin)
+## Youtube
+- [Kotlin Course - Tutorial for Beginners](https://www.youtube.com/watch?v=F9UC9DY-vIU)
+- [Refactoring to Kotlin with Duncan McGregor](https://www.youtube.com/c/DuncanMcGregors/playlists)
 
 
 # Notes
