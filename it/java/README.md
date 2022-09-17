@@ -1,4 +1,8 @@
 **Java**
+# Java Base
+## Notes
+- [Environment Configuration](notes/11b00a2a105e415685642616dca429a0.md)
+
 
 # Spring
 
