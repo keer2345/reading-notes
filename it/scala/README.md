@@ -1,5 +1,6 @@
 **Scala**
-
+## Notes
+- [Notes](https://github.com/keer2345/reading-notes/blob/main/it/scala/notes/README.md)
 ## Book
 
 - [Scala School](scala-school)
