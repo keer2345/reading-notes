@@ -1,5 +1,7 @@
 # 计算机信息
 - [aliyun](https://github.com/keer2345/reading-notes/tree/main/it/aliyun) 阿里云
+- [android](https://github.com/keer2345/reading-notes/tree/main/it/android)
+- [C / C++](https://github.com/keer2345/reading-notes/tree/main/it/c)
 - [Docker](https://github.com/keer2345/reading-notes/tree/main/it/docker)
 - [Groovy](https://github.com/keer2345/reading-notes/tree/main/it/groovy)
 - [Java](https://github.com/keer2345/reading-notes/tree/main/it/java)
