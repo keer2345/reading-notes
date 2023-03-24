@@ -2,6 +2,8 @@
 
 # Videos of Youtube
 ## Author
+- [Coding Addict](https://www.youtube.com/@CodingAddict)
+  - [React 18 Tutorial](https://www.youtube.com/playlist?list=PLnHJACx3NwAep5koWkniVHw8PK7dWCO21)  *[note](react18-tutorial)*
 - [Dev Ed](https://www.youtube.com/c/DevEd/playlists)
   - [Build A Todo App With REACT | React Project For Beginners (FULL)](https://www.youtube.com/watch?v=pCA4qpQDZD8)
 
