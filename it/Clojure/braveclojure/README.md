@@ -1,2 +1,2 @@
 # [Brave Clojure](https://www.braveclojure.com/)
-- [ch00](ch00.md)
+1. [ch01](ch01.md)
