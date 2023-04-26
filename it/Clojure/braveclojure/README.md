@@ -1,3 +1,5 @@
 # [Brave Clojure](https://www.braveclojure.com/)
 1. [Building, Running, and the REPL](ch01.md)
-1. [How to Use Emacs, an Excellent Clojure Editor](ch02.md)
+2. [How to Use Emacs, an Excellent Clojure Editor](ch02.md)
+3. [Do Things: A Clojure Crash Course](ch03.md)
+
