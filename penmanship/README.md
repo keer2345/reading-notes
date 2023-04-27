@@ -5,4 +5,4 @@
 - [书法：梁诗正](https://github.com/keer2345/reading-notes/issues/7)
 - [书法：钟绍京](https://github.com/keer2345/reading-notes/issues/8)
 
-- [书法：岳阳楼记](https://github.com/keer2345/reading-notes/issues/10)
+- [岳阳楼记](岳阳楼记)
