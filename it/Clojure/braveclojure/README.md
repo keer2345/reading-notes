@@ -2,4 +2,4 @@
 1. [Building, Running, and the REPL](ch01.md)
 2. [How to Use Emacs, an Excellent Clojure Editor](ch02.md)
 3. [Do Things: A Clojure Crash Course](ch03.md)
-
+4. [Core Functions in Depth](ch04.md)
