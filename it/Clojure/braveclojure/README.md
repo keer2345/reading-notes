@@ -3,3 +3,4 @@
 2. [How to Use Emacs, an Excellent Clojure Editor](ch02.md)
 3. [Do Things: A Clojure Crash Course](ch03.md)
 4. [Core Functions in Depth](ch04.md)
+5. [Functional Programming](ch05.md)
