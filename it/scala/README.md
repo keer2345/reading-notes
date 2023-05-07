@@ -9,7 +9,7 @@
 - [Grokking Function Programming](grokking-function-programming)
 - [get_programming_with_scala](get_programming_with_scala)
 - [Functional and Reactive Domain Modeling](Functional-and-Reactive-Domain-Modeling)
-- [Functional Programming, Simplified (Scala edition)](https://alvinalexander.com/scala/fp-book/learning-functional-programming-in-scala/)
+- [Functional Programming, Simplified (Scala edition)](Functional-Programming-Simplified-Scala-edition)
 
 # Scala Framework
 
