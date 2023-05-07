@@ -8,6 +8,7 @@
 - [Essential Scala](essential-scala)
 - [Grokking Function Programming](grokking-function-programming)
 - [get_programming_with_scala](get_programming_with_scala)
+- [Functional and Reactive Domain Modeling](Functional-and-Reactive-Domain-Modeling)
 
 # Scala Framework
 
