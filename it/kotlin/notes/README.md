@@ -1,6 +1,6 @@
 # Ktor
 - [Environment](c029021e047643c08a5022439288830a.md)
-- 
+
 # Kotlin in Spring Boot
 - [Recipe Maker of Kotlin](notes/56184849c38d44329fea419595819cab.md)
 - [How to create a REST API for your App with Spring Boot, Kotlin & Gradle](notes/56184849c38d44329fea419595819cab.md)
