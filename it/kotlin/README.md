@@ -1,4 +1,4 @@
-# [Notes](notes)
+# [Notes](notes/README.md)
 
 # Practical
 - [Kotlin Hands-On](hands-on)
