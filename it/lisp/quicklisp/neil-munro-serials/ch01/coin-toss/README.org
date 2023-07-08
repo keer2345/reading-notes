@@ -6,11 +6,11 @@
 
 ** Author
 
-+ keer (keer2345@gmail.com)
++ keer2345 (keer2345@gmail.com)
 
 ** Copyright
 
-Copyright (c) 2022 keer (keer2345@gmail.com)
+Copyright (c) 2023 keer2345 (keer2345@gmail.com)
 
 ** License
 

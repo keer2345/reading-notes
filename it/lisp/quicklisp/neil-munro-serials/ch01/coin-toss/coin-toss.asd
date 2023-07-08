@@ -1,21 +1,21 @@
-(defsystem "demo01"
+(defsystem "coin-toss"
   :version "0.1.0"
-  :author "keer"
+  :author "keer2345"
   :license "LLGPL"
   :depends-on ()
   :components ((:module "src"
                 :components
                 ((:file "main"))))
   :description ""
-  :in-order-to ((test-op (test-op "demo01/tests"))))
+  :in-order-to ((test-op (test-op "coin-toss/tests"))))
 
-(defsystem "demo01/tests"
-  :author "keer"
+(defsystem "coin-toss/tests"
+  :author "keer2345"
   :license "LLGPL"
-  :depends-on ("demo01"
+  :depends-on ("coin-toss"
                "rove")
   :components ((:module "tests"
                 :components
                 ((:file "main"))))
-  :description "Test system for demo01"
+  :description "Test system for coin-toss"
   :perform (test-op (op c) (symbol-call :rove :run c)))
