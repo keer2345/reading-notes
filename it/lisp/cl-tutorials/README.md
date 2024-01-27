@@ -5,3 +5,4 @@
 
 ## Contents
 1. [Installing SBCL](ch01.md)
+2. [Functions and If. Also lies](ch02.md)
