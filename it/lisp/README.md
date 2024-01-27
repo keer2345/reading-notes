@@ -1,6 +1,6 @@
 > [todo-lisp-read](https://github.com/keer2345/reading-notes/blob/main/it/lisp/todo.md)
 
-- [CL Tutorials]((https://github.com/keer2345/reading-notes/tree/main/it/lisp/cl-tutorials)
+- [CL Tutorials](https://github.com/keer2345/reading-notes/tree/main/it/lisp/cl-tutorials)
 - [Common Lisp Tutorial on Youtube](https://github.com/keer2345/reading-notes/tree/main/it/lisp/common-lisp-on-youtube)
 - [Practical Common Lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp/practical-common-lisp)
 - [Paradigms of Artificial Intelligence Programming](https://github.com/keer2345/reading-notes/tree/main/it/lisp/PAIP) _ing_
