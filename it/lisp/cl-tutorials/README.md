@@ -7,3 +7,4 @@
 1. [Installing SBCL](ch01.md)
 2. [Functions and If. Also lies](ch02.md)
 3. [let, let*, setq, defun, phew!](ch03.md)
+4. [quoting is not plaguarism](ch04.md)
