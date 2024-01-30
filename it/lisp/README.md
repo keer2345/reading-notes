@@ -18,6 +18,8 @@
 - [Programming Algorithms in Lisp](http://vseloved.github.io/progalgs.html)
 - [Lisp of Simon Fraser University](https://github.com/keer2345/reading-notes/tree/main/it/lisp/lisp-of-sfu)
 
+# Book
+- [Land Of Lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp/LandOfLisp)
 # Practices
 ## Quicklisp
 - [Neil Munro Serials](./quicklisp/neil-munro-serials)
