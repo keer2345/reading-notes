@@ -1,29 +1,24 @@
-**[3. Practical: A Simple Database](http://www.gigamonkeys.com/book/practical-a-simple-database.html)
+# [3. Practical: A Simple Database](http://www.gigamonkeys.com/book/practical-a-simple-database.html)
 
-In this chapter, I'll cover just enough Lisp as we go along for you to understand how the code works. But I'll gloss over quite a few details. For now you needn't sweat the small stuff--the next several chapters will cover all the Common Lisp constructs used here, and more, in a much more systematic way.
+## CDs and Records
 
-- [CDs and Records](#cds-and-records)
-- [Filing CDs](#filing-cds)
-- [Looking at the Database Contents](#looking-at-the-database-contents)
-- [Improving the User Interaction](#improving-the-user-interaction)
-- [Saving and Loading the Database](#saving-and-loading-the-database)
-- [Querying the Database](#querying-the-database)
-- [Updating Existing Records--Another Use for WHERE](#updating-existing-records--another-use-for-where)
-- [Removing Duplication and Winning Big](#removing-duplication-and-winning-big)
-- [Wrapping Up](#wrapping-up)
+列表：
 
-# CDs and Records
 ``` lisp
 CL-USER> (list 1 2 3)
 (1 2 3)
+
 CL-USER> (list :a 1 :b 2 :c 3)
 (:A 1 :B 2 :C 3)
+
 CL-USER> (getf (list :a 1 :b 2 :c 3) :a)
 1
+
 CL-USER> (getf (list :a 1 :b 2 :c 3) :c)
 3
 ```
-Given all that, you can easily enough write a function `make-cd` that will take the four fields as arguments and return a plist representing that CD.
+创建一个函数 **make-cd**
+
 ``` lisp
 (defun make-cd (title artist rating ripped)
   (list :title title :artist artist :rating rating :ripped ripped))
