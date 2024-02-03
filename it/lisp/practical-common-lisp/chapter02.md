@@ -39,3 +39,4 @@ CL-USER> (load (compile-file "hello.lisp"))
 ;;; Fasl write complete
 ; Fast loading /home/peter/my-lisp-programs/hello.fasl
 T
+```
