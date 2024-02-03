@@ -30,17 +30,22 @@ CL-USER> (make-cd "Roses" "Kathy Mattea" 7 t)
 
 # Filing CDs
 
+我们需要使用宏 __DEFVAR__ 来创建一个全局变量（global variable）__`*db*`__：
 ``` lisp
 (defvar *db* nil)
-
+```
+接着使用 **PUSH** 来添加记录到 `*db*`，先定义一个添加记录的函数 `add-record`：
+```lisp
 (defun add-record (cd) (push cd *db*))
 ```
 ``` lisp
 CL-USER> (add-record (make-cd "Roses" "Kathy Mattea" 7 t))
 ((:TITLE "Roses" :ARTIST "Kathy Mattea" :RATING 7 :RIPPED T))
+
 CL-USER> (add-record (make-cd "Fly" "Dixie Chicks" 8 t))
 ((:TITLE "Fly" :ARTIST "Dixie Chicks" :RATING 8 :RIPPED T)
  (:TITLE "Roses" :ARTIST "Kathy Mattea" :RATING 7 :RIPPED T))
+
 CL-USER> (add-record (make-cd "Home" "Dixie Chicks" 9 t))
 ((:TITLE "Home" :ARTIST "Dixie Chicks" :RATING 9 :RIPPED T)
  (:TITLE "Fly" :ARTIST "Dixie Chicks" :RATING 8 :RIPPED T)
@@ -49,9 +54,16 @@ CL-USER> (add-record (make-cd "Home" "Dixie Chicks" 9 t))
 
 # Looking at the Database Contents
 
-You can also see the current value of `*db*` whenever you want by typing `*db*` at the REPL.
-``` lisp
-(defun dump-db ()
+可以在 REPL 通过输入 `*db*` 来查看变量内容：
+```lisp
+CL-USER> *db*
+((:TITLE "Home" :ARTIST "Dixie Chicks" :RATING 9 :RIPPED T)
+ (:TITLE "Fly" :ARTIST "Dixie Chicks" :RATING 8 :RIPPED T)
+ (:TITLE "Roses" :ARTIST "Kathy Mattea" :RATING 7 :RIPPED T))
+```
+
+当然，我们要写一个函数 `dump-db` 来查看数据库内容：
+``` lisp(defun dump-db ()
   (dolist (cd *db*)
     (format t "~{~a:~10t~a~%~}~%" cd)))
 ```
