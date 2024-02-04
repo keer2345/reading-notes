@@ -165,3 +165,68 @@ NIL
   (loop (add-record (prompt-for-cd))
         (if (not (y-or-n-p "Another? [y/n]: ")) (return))))
 ```
+
+我们可以通过 `add-cds` 来添加媒体库了：
+```lisp
+CL-USER> (add-cds)
+Title: Rockin' the Suburbs
+Artist: Ben Folds
+Rating: 6
+Ripped [y/n]:  (y or n) y
+Another? [y/n]:  (y or n) y
+Title: Give Us a Break
+Artist: Limpopo
+Rating: 10
+Ripped [y/n]:  (y or n) y
+Another? [y/n]:  (y or n) y
+Title: Lyle Lovett
+Artist: Lyle Lovett
+Rating: 9
+Ripped [y/n]:  (y or n) n
+Another? [y/n]:  (y or n) n
+NIL
+CL-USER>
+```
+
+## Saving and Loading the Database
+定义函数 `save-db`：
+```lisp
+(defun save-db (filename)
+  (with-open-file (out filename
+                       :direction :output
+                       :if-exists :supersede)
+    (with-standard-io-syntax
+      (print *db* out))))  ;print宏用来将变量输出到流中
+```
+宏 **WITH-OPEN-FILE** 用来打开文件，绑定流到一个变量，执行一些操作，然后关闭文件。其中：
+```
+:direction :output;声明打开文件为了写
+:if-exists :supersede;如果文件存在则重写
+with-standard-io-syntax;表示标准的IO异常处理
+```
+`save-db` 的效果如下：
+```lisp
+CL-USER> (save-db "./my-cds.db")
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER>
+···
+
+加载数据：
+```lisp
+(defun load-db (filename)
+  (with-open-file (in filename)
+    (with-standard-io-syntax
+      (setf *db* (read in)))))
+```
+运行后，就把数据加载出来了：
+```lisp
+CL-USER> (load-db "./my-cds.db")
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+```
+
+
+## Querying the Database
