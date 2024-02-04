@@ -150,3 +150,18 @@ NIL
 > (or (parse-integer "10a" :junk-allowed t) 0)
 10
 ```
+进一步改善后的 `prompt-for-cd`：
+```lisp
+(defun prompt-for-cd ()
+  (make-cd
+   (prompt-read "Title")
+   (prompt-read "Artist")
+   (or (parse-integer (prompt-read "Rating") :junk-allowed t) 0)
+   (y-or-n-p "Ripped [y/n]: ")))
+```
+使用循环，可以不断的加入我们的 CD 媒体库：
+```lisp
+(defun add-cds ()
+  (loop (add-record (prompt-for-cd))
+        (if (not (y-or-n-p "Another? [y/n]: ")) (return))))
+```
