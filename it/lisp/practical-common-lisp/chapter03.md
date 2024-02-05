@@ -297,3 +297,21 @@ CL-USER> (select (artist-selector "Limpopo"))
 ((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T))
 CL-USER>
 ```
+
+
+可是这样的话，又要写类似的 `select-by-title`, `select-by-rating` 等等，考虑到这些都是类似的，我们需要写一个通用的选择函数。
+
+首先我们来了解一下基础知识：
+```lisp
+(defun foo (a b c)
+  (list a b c))
+```
+```lisp
+(defun foo (&key a b c)
+  (list a b c))
+```
+
+后者的差异在于 `&key`：
+```lisp
+(foo :a 1 :b 2 :c 3)
+```
