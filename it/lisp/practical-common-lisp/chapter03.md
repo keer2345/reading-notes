@@ -211,7 +211,7 @@ CL-USER> (save-db "./my-cds.db")
  (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
  (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
 CL-USER>
-···
+```
 
 加载数据：
 ```lisp
@@ -230,3 +230,36 @@ CL-USER> (load-db "./my-cds.db")
 
 
 ## Querying the Database
+目前为止，已经可以保存和加载数据了。我们还需要查找数据，类似这样：
+```lisp
+(select :artist "Dixie Chicks")
+```
+
+函数 **REMOVE-IF-NOT** 包含谓语和列表，并返回符合谓语断言的元素列表。换句话说，它移除了不匹配该断言的所有元素。
+不过 **REMOVE-IF-NOT** 并没有真的移除任何东西，它是创建了一个新的列表，原始列表并不受影响。
+
+```lisp
+CL-USER> (remove-if-not #'evenp '(1 2 3 4 5 6 7 8 9 10))
+(2 4 6 8 10)
+
+(remove-if-not #'(lambda (x) (= 0 (mod x 3))) '(1 2 3 4 5 6 7 8 9 10))
+(3 6 9)
+```
+
+函数 **GETF** 可以提取列表中的字段名，比如 `(getf cd :artist)` 可提取艺术家的名字。函数 **EQUAL** 判断元素是否相等。
+```lisp
+CL-USER> (load "simple-database.lisp")
+T
+CL-USER> (load-db "./my-cds.db")
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER> *db*
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+
+CL-USER> (remove-if-not #'(lambda (cd) (equal (getf cd :artist) "Lyle Lovett")) *db*)
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL))
+CL-USER>
+```
