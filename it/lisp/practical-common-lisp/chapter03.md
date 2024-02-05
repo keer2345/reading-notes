@@ -263,3 +263,17 @@ CL-USER> (remove-if-not #'(lambda (cd) (equal (getf cd :artist) "Lyle Lovett")) 
 ((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL))
 CL-USER>
 ```
+
+我们可以写出通过艺术家查找唱片的函数：
+```lisp
+(defun select-by-artist (artist)
+  (remove-if-not
+    #'(lambda (cb) (equal (getf cd :artist) artist))
+    *db))
+```
+
+我们需要写一个通用的查询函数 `select`：
+```lisp
+(defun select (selector-fn)
+  (remove-if-not selector-fn *db*))
+```
