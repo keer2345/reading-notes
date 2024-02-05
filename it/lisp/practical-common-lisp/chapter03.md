@@ -277,3 +277,23 @@ CL-USER>
 (defun select (selector-fn)
   (remove-if-not selector-fn *db*))
 ```
+```lisp
+CL-USER> (select #'(lambda (cd) (equal (getf cd :artist) "Lyle Lovett")))
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL))
+
+CL-USER> (select #'(lambda (cd) (equal (getf cd :title) "Rockin' the Suburbs")))
+((:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+
+CL-USER> 
+```
+
+但是，这看起来也很不友好，我们需要进一步完善匿名函数：
+```lisp
+(defun artist-selector (artist)
+  #'(lambda (cd) (equal (getf cd :artist) artist)))
+```
+```lisp
+CL-USER> (select (artist-selector "Limpopo"))
+((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T))
+CL-USER>
+```
