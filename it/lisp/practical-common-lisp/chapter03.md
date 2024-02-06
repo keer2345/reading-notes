@@ -338,10 +338,25 @@ CL-USER>
 要构建的 `where` 函数看起来像这样：
 ```lisp
 (defun where (&key title artist rating (ripped nil ripped-p))
-  #'(lambda (db)
+  #'(lambda (cd)
       (and
-       (if title    (equal (getf cd :title)  title)   t)
+       (if title    (equal (getf cd :title)  title)  t)
        (if artist   (equal (getf cd :artist) artist) t)
        (if rating   (equal (getf cd :rating) rating) t)
        (if ripped-p (equal (getf cd :ripped) ripped) t))))
+```
+运行如下：
+```lisp
+CL-USER> *db*
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER> (select (where :artist "Lyle Lovett"))
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL))
+CL-USER> (select (where :ripped t))
+((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER> (select (where :ripped t :rating 10))
+((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T))
+CL-USER>
 ```
