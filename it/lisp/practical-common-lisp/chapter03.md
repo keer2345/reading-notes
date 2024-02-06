@@ -313,5 +313,35 @@ CL-USER>
 
 后者的差异在于 `&key`：
 ```lisp
-(foo :a 1 :b 2 :c 3)
+(foo :a 1 :b 2 :c 3)  ; (1 2 3)
+(foo :c 3 :b 2 :a 1)  ; (1 2 3)
+(foo :a 1 :c 3)       ; (1 NIL 3)
+(foo)                 ; (NIL NIL NIL)
+```
+
+判断传递的参数是否为空：
+```lisp
+(defun foo (&key a (b 20) (c 30 c-p)) (list a b c c-p))
+
+(foo :a 1 :b 2 :c 3)  ; (1 2 3 T)
+(foo :c 3 :b 2 :a 1)  ; (1 2 3 T)
+(foo :a 1 :c 3)       ; (1 20 3 T)
+(foo)                 ; (NIL 20 30 NIL)
+```
+
+回到正题，通用的选择函数我们定义为 `where`，就像 SQL 里的一样。例如：
+```lisp
+(select (where :artist "Dixie Chicks"))
+(select (where :rating 10 :ripped nil))
+```
+
+要构建的 `where` 函数看起来像这样：
+```lisp
+(defun where (&key title artist rating (ripped nil ripped-p))
+  #'(lambda (db)
+      (and
+       (if title    (equal (getf cd :title)  title)   t)
+       (if artist   (equal (getf cd :artist) artist) t)
+       (if rating   (equal (getf cd :rating) rating) t)
+       (if ripped-p (equal (getf cd :ripped) ripped) t))))
 ```
