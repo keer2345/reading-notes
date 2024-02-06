@@ -360,3 +360,8 @@ CL-USER> (select (where :ripped t :rating 10))
 ((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T))
 CL-USER>
 ```
+
+
+## Updating Existing Records--Another Use for WHERE
+
+到现在，我们构建了 `select` 和 `where` 函数。接下来构建 `update` 函数。
