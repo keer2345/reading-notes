@@ -390,3 +390,17 @@ CL-USER> (update (where :artist "Limpopo") :title "Give Us a Break")
  (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
 CL-USER>
 ```
+
+
+接下来，可以很容易地写出删除功能的函数：
+```lisp
+(defun delete-rows (selector-fn)
+  (setf *db* (remove-if selector-fn *db*)))
+```
+```lisp
+CL-USER> *db*
+((:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER> 
+```
+
+## Removing Duplication and Winning Big
