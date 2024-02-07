@@ -365,3 +365,28 @@ CL-USER>
 ## Updating Existing Records--Another Use for WHERE
 
 到现在，我们构建了 `select` 和 `where` 函数。接下来构建 `update` 函数。
+
+关于这部分，可以参考：
+- https://www.coder.work/article/2071239
+- https://stackoverflow.com/questions/38897093/practical-common-lisp-understanding-chapter-3
+
+```lisp
+(defun update (selector-fn &key title artist rating (ripped nil ripped-p))
+  (setf *db*
+        (mapcar
+         #'(lambda (row)
+             (when (funcall selector-fn row)
+               (if title (setf (getf row :title) title))
+               (if artist (setf (getf row :artist) artist))
+               (if rating (setf (getf row :rating) rating))
+               (if ripped-p (setf (getf row :ripped) ripped)))
+             row) *db* )))
+```
+运行：
+```lisp
+CL-USER> (update (where :artist "Limpopo") :title "Give Us a Break")
+((:TITLE "Lyle Lovett" :ARTIST "Lyle Lovett" :RATING 9 :RIPPED NIL)
+ (:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 9 :RIPPED T)
+ (:TITLE "Rockin' the Suburbs" :ARTIST "Ben Folds" :RATING 6 :RIPPED T))
+CL-USER>
+```
