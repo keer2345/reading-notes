@@ -406,7 +406,35 @@ CL-USER>
 
 我们的代码已经超过了 50 行，其中有一些是重复的代码，我们要消除重复，让代码更加的灵活。
 
-Lisp 的一个特性就是宏，必须去掉的是除了名字 **Macro** 和 C、C++ 的宏相同之外，实质上是不同的。
+Lisp 的一个特性就是宏，必须强调的是除了名字 **Macro** 和 C、C++ 的宏相同之外，实质上是不同的。
 
 从一个简单的例子开始，展示如何通过 `where` 宏来替换 `where` 函数。在此之前，我先介绍一个新的函数：**REVERSE**，它有一个列表参数，
-并返回一个反转的列表。比如 `(reverse '(1 2 3))`,演变为 `(3 2 1)`.
+并返回一个反转的列表。比如 `(reverse '(1 2 3))` 的值为 `(3 2 1)`.
+```lisp
+(reverse '(1 2 3))  ; (3 2 1)
+```
+
+我们来定义一个宏：
+```lisp
+(defmacro backwards (expr) (reverse expr))
+```
+**DEFMACRO** 和 **DEFUN** 主要区别在于前者是用来定义宏的。宏的使用：
+```lisp
+CL-USER> (backwards ("hello, world" t format))
+hello, world
+NIL
+```
+
+它是如何工作的？翻转后 `(format t "hello, world")` ，再求值。
+
+这有助于前面的 `where` 的重复代码吗？当然，我们可以为每个写个宏，为每个特定的调用来生成代码。同样，最好的方法是自底向上构建。
+
+```
+(equal (getf cd field) value)
+```
+我们创建一个函数，提供字段的名字和值，返回类似的表达式：
+```lisp
+(defun make-comparision-expr (field value)  ; wrong
+  (list equal (list getf cd field) value)
+```
+
