@@ -434,7 +434,42 @@ NIL
 ```
 我们创建一个函数，提供字段的名字和值，返回类似的表达式：
 ```lisp
-(defun make-comparision-expr (field value)  ; wrong
+(defun make-comparision-expr (field value)  ; 这是一个错误示例
   (list equal (list getf cd field) value)
+```
+
+上面的示例是错误的，正如我们知道的，Lisp 会尝试将 `equal`，`getf` 和 `cd` 作为变量，这不是我们想要的。要解决这个问题，只需要在前面加个单引号 `'a`，像这样：
+```lisp
+(defun make-comparison-expr (field value)
+  (list 'equal (list 'getf 'cd field) value))
+```
+在 REPL 中测试：
+```lisp
+CL-USER> (make-comparison-expr :rating 10)
+(EQUAL (GETF CD :RATING) 10)
+CL-USER> (make-comparison-expr :title "Give Us a Break")
+(EQUAL (GETF CD :TITLE) "Give Us a Break")
+```
+
+其实，还有更好的方法。像单引号那样，前面加上反引号（`` ` ``）来禁止求值:
+```lisp
+; SLIME 2.29.1
+CL-USER> `(1 2 3)
+(1 2 3)
+CL-USER> '(1 2 3)
+(1 2 3)
+CL-USER> (equal `(1 2 3) '(1 2 3))
+T
+CL-USER> `(1 2 (+ 1 2))
+(1 2 (+ 1 2))
+CL-USER> `(1 2 ,(+ 1 2))
+(1 2 3)
+CL-USER>
+```
+
+这样的话，`make-comparison-expr` 函数可以改成：
+```lisp
+(defun make-comparison-expr (field value)
+  `('equal (getf cd ,field) ,value))
 ```
 
