@@ -473,3 +473,53 @@ CL-USER>
   `('equal (getf cd ,field) ,value))
 ```
 
+再看看之前的函数，可以看到函数体由多个字段或值组成，包裹在 **AND** 表达式里。假设给 `where` 宏赋予简单列表的参数，将需要一个函数，
+它可以成对获取列表中的元素，并手机调用 `make-comparison-expr` 返回的结果。为了实现这样一个函数，可以从高级的 Lisp 技巧中知道到
+ **LOOP** 宏：
+ ```lisp
+(defun make-comparisons-list (fields)
+  (loop while fields
+        collecting (make-comparison-expr (pop fields) (pop fields))))
+```
+
+**LOOP** 会在 [第22章](ch22.md)详细讲解，这里只要知道 **LOOP** 表达式可以满足我们的需求：需要 `fields` 列表里的元素，每次
+通过 `make-comparison-expr` 舍弃两个，并在循环结束后返回结果。宏 **POP** 是 **PUSH** 的逆操作。
+
+定义 `where` 宏：
+
+```lisp
+(defmacro where (&rest clauses)
+  `#'(lambda (cd) (and ,@(make-comparisons-list clauses))))
+```
+```lisp
+`(and ,(list 1 2 3))   ==> (AND (1 2 3))
+`(and ,@(list 1 2 3))  ==> (AND 1 2 3)
+`(and ,@(list 1 2 3) 4) ==> (AND 1 2 3 4)
+```
+
+这个列表被传递给了 `make-comparisons-list`，其返回一个由比较表达式所组成的列表。可以通过使用函数 `MACROEXPAND-1` 来精确地看到一个 `where` 调用将产生出哪些代码。如果传给 **MACROEXPAND-1** 一个代表宏调用的形式，它将使用适当的参数来调用宏代码并返回其展开式。因此可以像这样检查上一个`where` 调用：
+```lisp
+CL-USER> (macroexpand-1 '(where :title "Give Us a Break" :ripped t))
+#'(LAMBDA (CD)
+    (AND (EQUAL (GETF CD :TITLE) "Give Us a Break")
+         (EQUAL (GETF CD :RIPPED) T)))
+T
+
+```
+看起来不错。现在让我们实际试一下。
+```lisp
+CL-USER> (select (where :title "Give Us a Break" :ripped t))
+((:TITLE "Give Us a Break" :ARTIST "Limpopo" :RATING 10 :RIPPED T))
+```
+
+现在，有趣的事情发生了。你不但去除了重复，而且还使得代码更有效且更通用了。这通常就是正确选用宏所达到的效果。这件事合乎逻辑，是因为宏只不过是另一种创建抽象的手法——词法层面的抽象，以及按照定义通过更简明地表达底层一般性的方式所得到的抽象。现在这个微型数据库的代码中只有 make-cd、prompt-for-cd 以及 add-cd 函数是特定于 CD 及其字段的。事实上，新的 where 宏可以用在任何基于 plist 的数据库上。
+
+
+
+尽管如此，它距离一个完整的数据库仍很遥远。你可能会想到还有大量需要增加的特性，包括支持多表或是更复杂的查询。第 27 章将建立一个具备这些特性的 MP3 数据库。
+
+
+本章的要点在于快速介绍少量 Lisp 特性，展示如何用它们编写出比 “hello, world” 更有趣一点儿的代码。在下一章里，我们将对 Lisp 做一个更加系统的概述。
+
+## 总结
+现在，有趣的事情发生了。你不但去除了重复，而且还使得代码更有效且更通用了。这通常就是正确选用宏所达到的效果。这件事合乎逻辑，是因为宏只不过是另一种创建抽象的手法——词法层面的抽象，以及按照定义通过更简明地表达底层一般性的方式所得到的抽象。现在这个微型数据库的代码中只有 make-cd、prompt-for-cd 以及 add-cd 函数是特定于 CD 及其字段的。事实上，新的 where 宏可以用在任何基于 plist 的数据库上。
