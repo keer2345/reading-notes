@@ -1,11 +1,30 @@
-**[4. Syntax and Semantics](http://www.gigamonkeys.com/book/syntax-and-semantics.html)**
+# [语法和语义](http://www.gigamonkeys.com/book/syntax-and-semantics.html)
 
-- What's with All the Parentheses?
-- Breaking Open the Black Box
-- S-expressions
-- S-expressions As Lisp Forms
-- Function Calls
-- Special Operators
-- Macros
-- Truth, Falsehood, and Equality
-- Formatting Lisp Code
+## 括号里都可以有什么
+
+Lisp 的语法和源自 Algol 的语言在语法上有很多不同。两者特征最明显的区别在于前者大量使用了括号和前缀表示法。说来也怪，大量的追随者都喜欢这样的语法。Lisp 的反对者们总是将这种语法描述成 “奇怪的” 和 “讨厌的”，他们说 Lisp 就是 “大量不合理的多余括号”（Lots of Irritating Superfluous Parentheses）的简称；而 Lisp 的追随者则认为，Lisp 的语法是它的最大优势。为什么两个团体之间会有如此对立的见解呢？
+
+在本章不可能完整地描述 Lisp 的语法，因为我还没有彻底地解释 Lisp 的宏，但我可以从一些宝贵的历史经验来说明保持开放的思想是值得的：John McCarthy 首次发明 Lisp 时，曾想过实现一种类 Algol 的语法，他称之为 M-表达式。尽管如此，他却从未实现这一点。他在自己的文章《History of Lisp》中对此加以解释。
+
+>     这个精确定义 M-表达式以及将其编译或至少转译成 S-表达式的工程，既没有完成也没有明确放弃，它只不过是被无限期地推迟了。（相比 S-表达式）更加偏爱类 FORTRAN 或类 Algol 表示法的程序员新一代也许会最终实现它。
+
+换句话说，过去 45 年以来，实际使用 Lisp 的人们已经喜欢上了这种语法，并且发现它能使该语言变得更为强大。接下来的几章里将告诉你为什么会这样。
+
+## 打开黑盒子
+
+在介绍 Lisp 的语法和语义之前，先看一下它们的定义以及和其他语言的不同之处。
+
+在大多数语言中，语言处理（不管是解释器还是编译器）都是黑箱操作。
+
+而在 Common Lisp 中，分工则有点不同，无论从实现者的角度还是从语言定义方式的角度上来说都是这样。与一个从文本到程序行为一步到位的单一黑箱有所不 同的是，Common Lisp 定义了两个黑箱，一个将文本转化成 Lisp 对象，而另一个则用这些对象来实现语言的语义。前一个箱子称为读取器，后一个称为求值器。
+
+## S-表达式
+S-表达式的基本元素是列表（list）和原子（atom）。列表由括号所包围，并可包含任何数量的由空格所分隔的元素。原子是所有其他内容。列表元素本身也可以是 S-表达式（换句话说，也就是原子或嵌套的列表）。注释——从技术角度来讲不是 S-表达式，它们以分号开始，直到一行的结尾，本质上将被当作空白来处理。
+
+## 其他章节
+- 作为 Lisp 形式的 S-表达式
+- 函数调用
+- 特别操作符
+- 宏
+- Truth, Falsehood, and Equality（真、假和等价）
+- 格式化 Lisp 代码
