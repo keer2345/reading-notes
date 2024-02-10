@@ -1,16 +1,6 @@
-**[5. Functions](http://www.gigamonkeys.com/book/functions.html)**
+# [Functions](http://www.gigamonkeys.com/book/functions.html)
 
-- [Defining New Functions](#defining-new-functions)
-- [Function Parameter Lists](#function-parameter-lists)
-- [Optional Parameters](#optional-parameters)
-- [Rest Parameters](#rest-parameters)
-- [Keyword Parameters](#keyword-parameters)
-- [Mixing Different Parameter Types](#mixing-different-parameter-types)
-- [Function Return Values](#function-return-values)
-- [Functions As Data, a.k.a. Higher-Order Functions](#functions-as-data-aka-higher-order-functions)
-- [Anonymous Functions](#anonymous-functions)
-
-# Defining New Functions
+## 定义函数
 ``` lisp
 (defun name (parameter*)
   "Optional documentation string."
@@ -25,8 +15,9 @@
   (format t "Summing ~d and ~d.~%" x y)
   (+ x y))
 ```
-# Function Parameter Lists
-# Optional Parameters
+## 函数参数列表
+# 可选参数
+`&optional` 后面的参数，未指定值的话，默认是 `NIL`：
 ``` lisp
 (defun foo (a b &optional c d) (list a b c d))
 
@@ -35,21 +26,19 @@
 (foo 1 2 3 4) ==> (1 2 3 4)
 ``` 
 
-Of course, you'll often want a different default value than NIL. 
-
+当然，也可以指定默认值：
 ``` lisp
 (defun foo (a &optional (b 10)) (list a b))
 
 (foo 1 2) ==> (1 2)
 (foo 1)   ==> (1 10)
 ``` 
-
-Sometimes, however, you may need more flexibility in choosing the default value. You may want to compute a default value based on other parameters. And you can--the default-value expression can refer to parameters that occur earlier in the parameter list. 
+更灵活的指定默认值，可以基于其他入参：
 ``` lisp
 (defun make-rectangle (width &optional (height width)) ...)
 ```
 
-Occasionally, it's useful to know whether the value of an optional argument was supplied by the caller or is the default value. 
+我们可以知道默认值是否是人为指定的：
 
 ``` lisp
 (defun foo (a b &optional (c 3 c-supplied-p))
@@ -60,12 +49,12 @@ Occasionally, it's useful to know whether the value of an optional argument was 
 (foo 1 2 3) ==> (1 2 3 T)
 (foo 1 2 4) ==> (1 2 4 T)
 ``` 
-# Rest Parameters
+## Rest 入参
 ``` lisp
 (defun format (stream string &rest values) ...)
 (defun + (&rest numbers) ...) 
 ``` 
-# Keyword Parameters
+# Keyword 入参
 ``` lisp
 (defun foo (&key a b c) (list a b c))
 ``` 
@@ -103,7 +92,7 @@ lets the caller call it like this:
 
 This style is mostly useful if you want to completely decouple the public API of the function from the internal details, usually because you want to use short variable names internally but descriptive keywords in the API. It's not, however, very frequently used. 
 
-# Mixing Different Parameter Types
+## 混合参数类型
 
 Combining `&optional` and `&key` parameters yields surprising enough results that you should probably avoid it altogether. The problem is that if a caller doesn't supply values for all the optional parameters, then those parameters will eat up the keywords and values intended for the keyword parameters. For instance, this function unwisely mixes `&optional` and `&key` parameters:
 
@@ -141,10 +130,7 @@ you get this result:
 (foo :a 1 :b 2 :c 3)  ==> ((:A 1 :B 2 :C 3) 1 2 3)
 ``` 
 
-# Function Return Values
-All the functions you've written so far have used the default behavior of returning the value of the last expression evaluated as their own return value. This is the most common way to return a value from a function.
-
-However, sometimes it's convenient to be able to return from the middle of a function such as when you want to break out of nested control constructs. In such cases you can use the **RETURN-FROM** special operator to immediately return any value from the function.
+## 函数返回值 
 
 ``` lisp
 (defun foo (n)
@@ -153,7 +139,7 @@ However, sometimes it's convenient to be able to return from the middle of a fun
       (when (> (* i j) n)
         (return-from foo (list i j))))))
 ```
-# Functions As Data, a.k.a. Higher-Order Functions
+## 高阶函数
 ``` lisp
 CL-USER> (defun foo (x) (* 2 x))
 FOO
