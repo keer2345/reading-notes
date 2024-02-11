@@ -140,6 +140,9 @@ you get this result:
         (return-from foo (list i j))))))
 ```
 ## 高阶函数
+
+> 参考资料：http://hk.javashuo.com/article/p-ympvqkhy-me.html
+
 使用函数主要是通过函数名来调用它们，但有时也当做数据看待。例如，如果将函数作为另一个函数的参数。
 ``` lisp
 CL-USER> (defun foo (x) (* 2 x))
@@ -180,10 +183,6 @@ T
         (format t "~%")))
 ``` 
 
-for (0 .. 4 , 1/2) {
-  2.7 ^ 0, 1 *
-  2.7 ^ 0.5 
-}
 
 ``` lisp
 CL-USER> (plot #'exp 0 4 1/2)
@@ -209,18 +208,31 @@ NIL
 ```
 
 **APPLY**
+```lisp
+CL-USER> (apply #'plot #'exp '(0 4 1/2))
+*
+**
+***
+*****
+********
+*************
+*********************
+**********************************
+*******************************************************
+NIL
 
-That's where **APPLY** comes in. Like **FUNCALL**, the first argument to **APPLY** is a function object. But after the function object, instead of individual arguments, it expects a list. It then applies the function to the values in the list. This allows you to write the following instead:
-
-``` lisp
-(apply #'plot plot-data)
-``` 
-
-As a further convenience, **APPLY** can also accept "loose" arguments as long as the last argument is a list. Thus, if `plot-data` contained just the min, max, and step values, you could still use **APPLY** like this to plot the **EXP** function over that range:
-
-``` lisp
-(apply #'plot #'exp plot-data)
-``` 
+CL-USER> (apply #'plot '(exp 0 4 1/2))
+*
+**
+***
+*****
+********
+*************
+*********************
+**********************************
+*******************************************************
+NIL
+```
 
 **APPLY** doesn't care about whether the function being applied takes **&optional, &rest**, or **&key** arguments--the argument list produced by combining any loose arguments with the final list must be a legal argument list for the function with enough arguments for all the required parameters and only appropriate keyword parameters. 
 
