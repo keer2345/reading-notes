@@ -140,6 +140,7 @@ you get this result:
         (return-from foo (list i j))))))
 ```
 ## 高阶函数
+使用函数主要是通过函数名来调用它们，但有时也当做数据看待。例如，如果将函数作为另一个函数的参数。
 ``` lisp
 CL-USER> (defun foo (x) (* 2 x))
 FOO
@@ -149,18 +150,28 @@ CL-USER> (function foo)
 
 CL-USER> #'foo
 #<Interpreted Function FOO>
-``` 
-Common Lisp provides two functions for invoking a function through a function object: **FUNCALL** and **APPLY**. They differ only in how they obtain the arguments to pass to the function. 
 
-FUNCALL is the one to use when you know the number of arguments you're going to pass to the function at the time you write the code. The first argument to FUNCALL is the function object to be invoked, and the rest of the arguments are passed onto that function. Thus, the following two expressions are equivalent:
+CL-USER> (equal (function foo) #'foo)
+T
+``` 
+一旦获取了函数对象，就剩下一件事情可做了——调用它。Common Lisp 提供了两种调用方式：**FUNCALL** 和 **APPLY**，
+它们的区别只在于如何获取传递给函数的参数。
+
+**FUNCALL** ：当你知道函数的参数数量时使用 `funcall`，第一个参数是函数名，剩余的参数是传递给该函数的入参。下面的表达式是等价的：
 
 ``` lisp
 (foo 1 2 3) === (funcall #'foo 1 2 3)
 ``` 
+``` lisp
+CL-USER> (equal (foo 2) (funcall #'foo 2))
+T
+CL-USER> (eq (foo 2) (funcall #'foo 2))
+T
 
-However, there's little point in using **FUNCALL** to call a function whose name you know when you write the code. In fact, the previous two expressions will quite likely compile to exactly the same machine instructions.
+``` 
+然而，在编写代码时用 **FUNCALL** 来调用已经知道名称的函数毫无意义。实际上，前面的两个表达式将很可能被编译成相同的机器指令。
 
-The following function demonstrates a more apt use of **FUNCALL**. It accepts a function object as an argument and plots a simple ASCII-art histogram of the values returned by the argument function when it's invoked on the values from `min` to `max`, stepping by `step`.
+下面演示了 **FUNCALL** 更有意义的用法，将函数对象作为入参并通过返回值来描绘出简单的 ASCII 图形，该函数的参数有 `min`, `max`, `step`：
 
 ``` lisp
 (defun plot (fn min max step)
@@ -169,18 +180,32 @@ The following function demonstrates a more apt use of **FUNCALL**. It accepts a 
         (format t "~%")))
 ``` 
 
+for (0 .. 4 , 1/2) {
+  2.7 ^ 0, 1 *
+  2.7 ^ 0.5 
+}
+
 ``` lisp
 CL-USER> (plot #'exp 0 4 1/2)
 *
-*
 **
-****
-*******
-************
-********************
-*********************************
-******************************************************
+***
+*****
+********
+*************
+*********************
+**********************************
+*******************************************************
 NIL
+
+CL-USER> (plot #'(lambda (x) (+ x 3)) 0 4 1)
+***
+****
+*****
+******
+*******
+NIL
+
 ```
 
 **APPLY**
