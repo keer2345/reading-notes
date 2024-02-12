@@ -206,8 +206,20 @@ CL-USER> (plot #'(lambda (x) (+ x 3)) 0 4 1)
 NIL
 
 ```
+当参数列表是在运行时才得知的话，FUNCAL 将无从下手。例如，再次调用 `plot` 函数，假设有一个列表包含了函数对象 `fn`、`min`、 `max` 和 `step`，
+也就是说这个列表包含了你想要的。假设列表保存在 `plot-data` 中，你将这样调用 `plot`：
 
-**APPLY**
+```lisp
+(plot (first plot-data) (second plot-data) (third plot-data) (fourth plot-data))
+```
+
+这样固然可以，但仅仅为了将实参传给 plot 而显式地将其解开，看起来相当厌烦。
+
+这时候，是该 **APPLY** 出场了，类似 FUNCALL, 第一个参数 APPLY 是函数对象。
+```lisp
+(apply #'plot plot-data)
+(apply #'plot #'exp plot-data)
+```
 ```lisp
 CL-USER> (apply #'plot #'exp '(0 4 1/2))
 *
@@ -233,8 +245,7 @@ CL-USER> (apply #'plot '(exp 0 4 1/2))
 *******************************************************
 NIL
 ```
-
-**APPLY** doesn't care about whether the function being applied takes **&optional, &rest**, or **&key** arguments--the argument list produced by combining any loose arguments with the final list must be a legal argument list for the function with enough arguments for all the required parameters and only appropriate keyword parameters. 
+ 
 
 # Anonymous Functions
 ``` lisp
