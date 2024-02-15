@@ -1,4 +1,4 @@
-**[6. Variables](http://www.gigamonkeys.com/book/variables.html)**
+# [6. Variables](http://www.gigamonkeys.com/book/variables.html)
 
 _ Variable Basics
 _ Lexical Variables and Closures
