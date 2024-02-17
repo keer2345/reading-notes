@@ -15,7 +15,7 @@
 1. [Syntax and Semantics](chapter04.md)
 1. [Functions](chapter05.md)
 1. [Variables](chapter06.md)
-1. [Macros: Standard Control Constructs](http://www.gigamonkeys.com/book/macros-standard-control-constructs.html)
+1. [Macros: Standard Control Constructs](chapter07.md)
 1. [Macros: Defining Your Own](http://www.gigamonkeys.com/book/macros-defining-your-own.html)
 1. [Practical: Building a Unit Test Framework](http://www.gigamonkeys.com/book/practical-building-a-unit-test-framework.html)
 1. Numbers, Characters, and Strings
