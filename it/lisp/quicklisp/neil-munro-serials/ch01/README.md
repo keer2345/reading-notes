@@ -54,3 +54,11 @@
       (format t "You Win!~%")
       (format t "You Loose!~%")))
 ```
+
+
+## Notes
+- format
+- random, make-random-state
+- string-downcase
+- string=
+- force-input, read-line
