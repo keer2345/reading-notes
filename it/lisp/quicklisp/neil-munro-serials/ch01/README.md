@@ -6,6 +6,7 @@
 
 ``` shell
 > rlwrap sbcl
+* (ql:quickload :cl-project)
 * (cl-project:make-project #p"./coin-toss/" :author "keer2345" :email "keer2345@gmail.com" :license "LLGPL")
 ```
 
