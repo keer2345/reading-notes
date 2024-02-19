@@ -2,3 +2,4 @@
 
 0. [ch00](./ch00)
 1. [ch01: Coin Toss](./ch01)
+2. [Rock Paper Scissors](./ch02)
