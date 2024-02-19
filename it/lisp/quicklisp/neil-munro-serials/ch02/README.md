@@ -71,3 +71,12 @@
 
 (game)
 ```
+
+
+Run：
+```sh
+rlwrap sbcl --script src/main.lisp 
+rock
+You entered: rock, CPU entered: scissors
+You win!
+```
