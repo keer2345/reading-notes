@@ -39,3 +39,18 @@
 ; 2 3 5 7 11 13 17 19 
 ```
 ## Macro Parameters
+```lisp
+(defmacro do-primes (var-and-range &rest body)
+  (let ((var (first var-and-range))
+        (start (second var-and-range))        
+        (end (third var-and-range)))
+  `(do ((,var (next-prime ,start) (next-prime (1+ ,var))))
+       ((> ,var ,end))
+       ,@body)))
+```
+```lisp
+(do-primes (p 0 19)
+           (format t "~d " p))
+2 3 5 7 11 13 17 19 
+NIL
+```
