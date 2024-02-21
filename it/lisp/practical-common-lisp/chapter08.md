@@ -48,9 +48,28 @@
        ((> ,var ,end))
        ,@body)))
 ```
+运行：
 ```lisp
 (do-primes (p 0 19)
            (format t "~d " p))
 2 3 5 7 11 13 17 19 
 NIL
 ```
+
+进一步演化，可以使用列表 `(var start end)` 来替代 `var-and-range`，列表的三个元素可以自动结构成三个参数。
+另外，可以使用 `&body` 来作为 `&rest` 的同义词，语义上是等价的，但很多开发环境使用 `&body` 参数以修改宏缩进的方式（通常 `&body` 参数
+用于组成宏主体的表单列表）。
+```lisp
+(defmacro do-primes2 ((var start end) &body body)
+  `(do ((,var (next-prime ,start) (next-prime (1+ ,var))))
+       ((> ,var ,end))
+     ,@body))
+```
+运行：
+```lisp
+(do-primes2 (p 0 19)
+            (format t "~d " p))
+2 3 5 7 11 13 17 19 
+NIL
+```
+## Generating the Expansion
