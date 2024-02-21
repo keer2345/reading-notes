@@ -25,3 +25,17 @@
 (defun next-prime (number)
   (loop for n from number when (primep n) return n))
 ```
+接下来编写宏。假设我们想要写出这样的样式：
+```lisp
+(do-primes (p 0 19)
+  (format t "~d " p))
+```
+还没有宏的时候，我们使用 **DO** 循环来实现：
+```lisp
+(do ((p (next-prime 0) (next-prime (1+ p))))
+    ((> p 19))
+    (format t "~d " p))
+
+; 2 3 5 7 11 13 17 19 
+```
+## Macro Parameters
