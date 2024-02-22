@@ -73,3 +73,22 @@ NIL
 NIL
 ```
 ## Generating the Expansion
+
+Backquote Syntax	|Equivalent List-Building Code|	Result
+----|----|----
+`(a (+ 1 2) c)	|(list 'a '(+ 1 2) 'c)	|(a (+ 1 2) c)
+`(a ,(+ 1 2) c)	|(list 'a (+ 1 2) 'c)|	(a 3 c)
+`(a (list 1 2) c)	|(list 'a '(list 1 2) 'c)	|(a (list 1 2) c)
+`(a ,(list 1 2) c)	|(list 'a (list 1 2) 'c)	|(a (1 2) c)
+`(a ,@(list 1 2) c)	|(append (list 'a) (list 1 2) (list 'c))	|(a 1 2 c)
+
+**macroexpand-1**
+```lisp
+CL-USER> (macroexpand-1 '(do-primes (p 0 19) (format t "~d " p)))
+(DO ((P (NEXT-PRIME 0) (NEXT-PRIME (1+ P))))
+    ((> P 19))
+  (FORMAT T "~d " P))
+T
+```
+
+## Plugging the Leaks
