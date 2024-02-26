@@ -11,4 +11,5 @@
 4. mango
 
 *** 命令
-- ~org-cycle-list-bullet~ ：修改列表前缀样式
+- ~org-cycle-list-bullet~ 列表前缀样式
+- ~org-sort-list~ 列表排序
