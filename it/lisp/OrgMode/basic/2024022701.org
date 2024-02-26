@@ -1,0 +1,14 @@
+#+TITLE: [[https://www.youtube.com/playlist?list=PLSxeivFT4JIrx6rwQB8VpSs3YeyTFuSwk][Emacs Org Mode Videos]]
+#+AUTHOR: keer
+#+DATE: <2024-02-27 二>
+
+* [[https://www.youtube.com/watch?v=hnMntOQjs7Q][Emacs Org Mode Demo 2021]]
+** 列表
+*** 举例
+1. banana
+2. apple
+3. orange
+4. mango
+
+*** 命令
+- ~org-cycle-list-bullet~ ：修改列表前缀样式
