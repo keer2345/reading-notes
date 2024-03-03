@@ -13,7 +13,7 @@ Here are suggested bindings, please modify the keys to your own liking.
 
 * Document Structure
 ** Headlines
-#+BEGIN_SRC lisp
+#+BEGIN_SRC org
   ,* Top level headline
   ,** Second level
   ,*** Third level
@@ -40,3 +40,30 @@ Here are suggested bindings, please modify the keys to your own liking.
 + M-S-RET (org-insert-todo-heading), Insert new TODO entry with same level as current heading.
 + C-S-RET (org-insert-todo-heading-respect-content), Insert new TODO entry with same level as current heading.
 + [[https://orgmode.org/manual/Structure-Editing.html][etc.]]
+** TODO [[https://orgmode.org/manual/Sparse-Trees.html][Sparse Trees]]
+** Plain Lists
+Org knows ordered lists, unordered lists, and description lists.
++ Unordered list items start with =-=, =+=, or =*= as bullets.
++ Ordered list items start with a numeral followed by either a period or a right parenthesis, such as =1.= or =1)=.
++ [ ]  TODO Description list items are unordered list items, and contain the separator ‘::’ to distinguish the
+  description term from the description.
+
+A list ends whenever every item has ended, which means before any line less or equally indented than items at top level.
+It also ends before two blank lines. In that case, all items are closed. Here is an example:
+#+BEGIN_SRC org
+  * Lord of the Rings
+  My favorite scenes are (in this order)
+  1. The attack of the Rohirrim
+  2. Eowyn's fight with the witch king
+     + this was already my favorite scene in the book
+     + I really like Miranda Otto.
+  3. Peter Jackson being shot by Legolas
+     - on DVD only
+     He makes a really funny face when it happens.
+  But in the end, no individual scenes matter but the film as a whole.
+  Important actors in this film are:
+  - Elijah Wood :: He plays Frodo
+  - Sean Astin :: He plays Sam, Frodo's friend.  I still remember him
+       very well from his role as Mikey Walsh in /The Goonies/.
+
+     #+END_SRC
