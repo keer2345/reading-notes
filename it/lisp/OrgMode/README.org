@@ -1,0 +1,3 @@
+* Notes
+** Org Mode
++ [[notes/20240303.org][Org manual]]
