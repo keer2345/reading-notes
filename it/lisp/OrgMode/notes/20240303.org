@@ -45,7 +45,7 @@ Here are suggested bindings, please modify the keys to your own liking.
 Org knows ordered lists, unordered lists, and description lists.
 + Unordered list items start with =-=, =+=, or =*= as bullets.
 + Ordered list items start with a numeral followed by either a period or a right parenthesis, such as =1.= or =1)=.
-+ [ ]  TODO Description list items are unordered list items, and contain the separator ‘::’ to distinguish the
++ [-]  TODO Description list items are unordered list items, and contain the separator ‘::’ to distinguish the
   description term from the description.
 
 A list ends whenever every item has ended, which means before any line less or equally indented than items at top level.
