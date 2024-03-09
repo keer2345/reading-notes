@@ -71,4 +71,30 @@ It also ends before two blank lines. In that case, all items are closed. Here is
 ** Blocks
 * Tables
 ** Build-in Table Editor
+
+A table might look like this:
+
+| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+| Anna  |  4321 |   9 |
+
+
+To create the above table, you would only type
+#+BEGIN_SRC
+| Name | Phone | Age |
+|-
+#+END_SRC
+
+and then press ~TAB~ to align the table and start filling in fields.
+
+Event faster would be to type ~|Name|Phone|Age~ followed by ~C-c RET~.
+
+
+
+
+
+
+
+
 ** Column Width and Alignment
