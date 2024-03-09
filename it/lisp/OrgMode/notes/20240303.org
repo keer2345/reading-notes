@@ -90,11 +90,54 @@ and then press ~TAB~ to align the table and start filling in fields.
 
 Event faster would be to type ~|Name|Phone|Age~ followed by ~C-c RET~.
 
+*Creation and conversion*
 
+- /C-c | (org-table-create-or-convent-from-region)/
 
+*Re-aligning and field motion*
 
+- /org-table-align/
+- TAB (org-table-next-field)
+- org-table-blank-field
+- S-TAB (org-table-previous-field)
+- RET (org-table-next-row)
+- M-a (org-table-beginning-of-field)
+- M-e (org-table-end-of-field)
 
+*Column and row editing*
 
+- M-LEFT (org-table-move-column-left)
+- M-RIGHT (org-table-move-column-right)
+- M-S-LEFT (org-table-delete-column)
+- M-S-RIGHT (org-table-insert-column)
+- M-UP (org-table-move-row-up)
+- M-DOWN (org-table-move-row-down)
+- M-S-UP (org-table-kill-row)
+- M-S-DOWN (org-table-insert-row)
+- S-UP (org-table-move-cell-up)
+- S-DOWN (org-table-move-cell-down)
+- S-LEFT (org-table-move-cell-left)
+- S-RIGHT (org-table-move-cell-right)
+- C-c - (org-table-insert-hline)
+- C-c RET (org-table-hline-and-move)
+- C-c ^ (org-table-sort-lines)
 
+*Regions*
+- C-c C-x M-w (org-table-copy-region)
+- C-c C-x C-w (org-table-cut-region)
+- C-c C-x C-y (org-table-paste-rectangle)
+- M-RET (org-table-wrap-region)
+
+*Calculations*
+- C-c + (org-table-sum)
+- S-RET (org-table-copy-down)
+
+*Miscellaneous*
+- C-c ` (org-table-edit-field)
+- M-x org-table-import
+- C-c | (org-table-create-or-convert-from-region)
+- M-x org-table-export
+- M-x org-table-header-line-mode
+- M-x org-table-transpose-table-at-point
 
 ** Column Width and Alignment
