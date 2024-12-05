@@ -4,6 +4,7 @@
 - [C / C++](https://github.com/keer2345/reading-notes/tree/main/it/c)
 - [Clojure](https://github.com/keer2345/reading-notes/tree/main/it/clojure)
 - [Docker](https://github.com/keer2345/reading-notes/tree/main/it/docker)
+- [Golang](https://github.com/keer2345/reading-notes/tree/main/it/golang)
 - [Groovy](https://github.com/keer2345/reading-notes/tree/main/it/groovy)
 - [Java](https://github.com/keer2345/reading-notes/tree/main/it/java)
 - [Kotlin](https://github.com/keer2345/reading-notes/tree/main/it/kotlin)
