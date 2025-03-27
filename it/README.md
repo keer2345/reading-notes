@@ -12,6 +12,7 @@
 - [Kotlin](https://github.com/keer2345/reading-notes/tree/main/it/kotlin)
 - [Kotlin for Android](https://github.com/keer2345/reading-notes/tree/main/it/kotlin-for-android)
 - [Lisp](https://github.com/keer2345/reading-notes/tree/main/it/lisp)
+- [Rust](https://github.com/keer2345/reading-notes/tree/main/it/rust)
 - [Python](https://github.com/keer2345/reading-notes/tree/main/it/python)
 - [React JS](https://github.com/keer2345/reading-notes/tree/main/it/react)
 - [Ruby](https://github.com/keer2345/reading-notes/tree/main/it/ruby)
