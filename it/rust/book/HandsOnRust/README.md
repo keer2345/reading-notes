@@ -6,3 +6,4 @@
 - [Source Code](https://github.com/thebracket/HandsOnRust)
 
 1. [Rust 及其开发环境](ch01.md)
+2. [Rust 的第一步](ch02.md)
