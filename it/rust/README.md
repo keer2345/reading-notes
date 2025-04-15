@@ -4,3 +4,5 @@
 
 # Books
 - [Programming Rust](book/Programming-Rust)
+- [HandsOnRust游戏开发实战](book/HandsOnRust)
+- [从零学Rust](https://www.kelen.cc/category/rust)
