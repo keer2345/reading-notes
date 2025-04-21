@@ -5,7 +5,7 @@
 
 ## 库
 
-- [cobra](https://github.com/spf13/cobra) `|` [viper](https://github.com/spf13/viper)
+- [cobra](https://github.com/spf13/cobra) | [viper](https://github.com/spf13/viper)
 
 ## Notes
 - [学习资料](./notes/20250314.md)
