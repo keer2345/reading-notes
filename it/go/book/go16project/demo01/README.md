@@ -1,3 +1,7 @@
+# Go 语言实战案例 -01-《命令行客户端》
+
+- https://www.bilibili.com/video/BV1Zz421y7Ln
+
 ## Library
 
 - [cobra](https://github.com/spf13/cobra)
