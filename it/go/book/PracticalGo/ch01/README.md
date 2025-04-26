@@ -1,6 +1,6 @@
 # Writing Command-Line Applications
 
-## Your First Application
+## 1. <a name='YourFirstApplication'></a>Your First Application
 
 All command-line applications essentially perform the following steps:
 
@@ -15,7 +15,7 @@ $ cd ch01/manual-parse
 $ go mod init PracticalGo/ch01/manual-parse
 ```
 
-> [source of the application](./manual-parse/main.go)
+> [source code](./manual-parse/main.go)
 
 Run:
 
@@ -49,4 +49,50 @@ Nice to meet you Joe Cool
 Nice to meet you Joe Cool
 Nice to meet you Joe Cool
 Nice to meet you Joe Cool
+```
+
+## Writing Unit Test
+
+> [source code](./manual-parse/validate_args_test.go)
+
+Run test:
+
+```sh
+go test -v
+```
+
+Result:
+
+```sh
+=== RUN   TestParseArgs
+--- PASS: TestParseArgs (0.00s)
+PASS
+ok  	PracticalGo/ch01/manual-parse	0.002s
+```
+
+> [source code](./manual-parse/validate_args_test.go)
+
+```sh
+> go test -v
+
+=== RUN   TestParseArgs
+--- PASS: TestParseArgs (0.00s)
+=== RUN   TestValidateArgs
+--- PASS: TestValidateArgs (0.00s)
+PASS
+ok  	PracticalGo/ch01/manual-parse	0.002s
+```
+
+> [source code](./manual-parse/run_cmd_test.go)
+
+```sh
+> go test -v
+=== RUN   TestParseArgs
+--- PASS: TestParseArgs (0.00s)
+=== RUN   TestRunCmd
+--- PASS: TestRunCmd (0.00s)
+=== RUN   TestValidateArgs
+--- PASS: TestValidateArgs (0.00s)
+PASS
+ok  	PracticalGo/ch01/manual-parse	0.002s
 ```

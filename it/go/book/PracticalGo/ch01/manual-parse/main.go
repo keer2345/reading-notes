@@ -27,7 +27,7 @@ func validateArgs(c config) error {
 }
 
 func printUsage(w io.Writer) {
-	fmt.Fprintf(w, usageString)
+	fmt.Fprintf(w, "%s", usageString)
 }
 
 func parseArgs(args []string) (config, error) {
@@ -56,7 +56,7 @@ func parseArgs(args []string) (config, error) {
 
 func getName(r io.Reader, w io.Writer) (string, error) {
 	msg := "Your name please? Press the Enter key when done.\n"
-	fmt.Fprintf(w, msg)
+	fmt.Fprintf(w, "%s", msg)
 
 	scanner := bufio.NewScanner(r)
 	scanner.Scan()
