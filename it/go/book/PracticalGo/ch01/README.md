@@ -96,3 +96,18 @@ ok  	PracticalGo/ch01/manual-parse	0.002s
 PASS
 ok  	PracticalGo/ch01/manual-parse	0.002s
 ```
+
+Run the following command first to create a coverage profile:
+
+```sh
+> go test -coverprofile cover.out
+PASS
+coverage: 71.2% of statements
+ok  	PracticalGo/ch01/manual-parse	0.002s
+```
+
+To see which parts of the code are covered, run the following:
+
+```sh
+> go tool cover -html=cover.out
+```
