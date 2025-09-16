@@ -1,5 +1,5 @@
 # Neovim
 
 ## 笔记
-- [优秀的配置](./notes/20250907.md)
+- [Github 上优秀的 Neovim  配置推荐](./notes/20250907.md)
 - [一些插件](./notes/20250908.md)
