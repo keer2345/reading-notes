@@ -1,3 +1,5 @@
+# 一些资源
+- [素材资源](notes/20250930.md)
 # Github Project
 
 - [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin)
