@@ -4,6 +4,7 @@
 
 ## Contents
 1. [Introduction](ch01.md)
+2. [Foundations](ch02.md)
 
 
 ![](https://lets-go.alexedwards.net/sample/assets/img/cover.png)
