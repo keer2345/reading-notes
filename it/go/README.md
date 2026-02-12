@@ -8,7 +8,9 @@
 
 - [cobra](https://github.com/spf13/cobra) | [viper](https://github.com/spf13/viper)
 
-## Notes
+## Notes 
+- [环境](./notes/20260210.md)
+
 
 - [一些书籍](./notes/20250829.md)
 - [学习资料](./notes/20250314.md)
